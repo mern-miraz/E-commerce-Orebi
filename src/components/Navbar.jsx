@@ -16,9 +16,11 @@ const Navbar = () => {
 
     let [catShow, setCatShow] = useState (false)
     let [cartShow, setCartSHow] = useState (false)
+    let [accountShow, setAccountShow] = useState (false)
 
     let catref = useRef()
     let cartref = useRef()
+    let accountref = useRef()
 
 
     useEffect(()=>{
@@ -28,18 +30,20 @@ const Navbar = () => {
             }else{
                 setCatShow (false)
             }
-        })
-    },[catShow])
 
-    useEffect(()=>{
-        document.addEventListener("click",(e)=>{
             if(cartref.current.contains(e.target) == true){
                 setCartSHow (!cartShow)
             }else{
                 setCartSHow (false)
             }
+
+            if(accountref.current.contains(e.target) == true){
+                setAccountShow(!accountShow)
+            }else{
+                setAccountShow(false)
+            }
         })
-    },[cartShow])
+    },[catShow,cartShow,accountShow])
 
 
   return (
@@ -71,12 +75,25 @@ const Navbar = () => {
                 </div>
 
                 <div className="w-[30%] flex relative justify-end gap-x-[30px]">
-                    <div className="flex">
+                <div className="">
+                    <div className="flex" ref={accountref}>
                         <FaUser/>
                         <TiArrowSortedDown/>
                     </div>
+
+                    {accountShow && <div className=" absolute top-[25px] right-0">
+                        <div className="">
+                                <p className='py-[17px] px-[60px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>My Account</p>
+                        </div>
+                        <div className="">
+                                <p className='py-[17px] pr-[73.5px] pl-[75.5px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>Log Out</p>
+                        </div>
+                    </div>}
+
+                </div>
                 <div className=" "> 
-                <div className=" cursor-pointer" ref={cartref}> <FaCartPlus/>  </div>
+
+            <div className=" cursor-pointer" ref={cartref}> <FaCartPlus/>  </div>
                 {cartShow && <div className="absolute top-[15px] right-0">
                     <div className="p-5 bg-[#F5F5F3] flex">
                         <div className="">
