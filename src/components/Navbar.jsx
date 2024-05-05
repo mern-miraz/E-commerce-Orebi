@@ -50,7 +50,7 @@ const Navbar = () => {
     <section className='bg-[#F5F5F3] py-4 lg:py-0'>
     <Container>
         <div className="h-[100px] items-center flex flex-wrap px-3">
-            <div className=" lg:w-[30%] w-[45%] relative cursor-pointer order-1 lg:order-1" >
+            <div className=" lg:w-[30%] w-[45%] relative cursor-pointer order-2 lg:order-1" >
                 <div  ref={catref} className="flex items-center gap-x-2">
                     <HiOutlineBars3BottomLeft className='font-dmsans text-[24px] font-bold text-[#262626]'/>
                     <p className='font-dmsans text-[14px] font-bold text-[#262626]'>Shop by Category</p>
@@ -67,16 +67,16 @@ const Navbar = () => {
                 </div>}
             </div>
 
-                <div className=" lg:w-[40%] order-3 lg:order-2">
+                <div className=" lg:w-[40%] order-1 lg:order-2 w-full flex justify-center">
                     <div className="flex items-center relative">
                         <input type='search' placeholder='Search Products' className='h-[50px] lg:w-[601px] outline-none px-5 font-dmsans text-[22px] font-bold text-[#262626] placeholder:text-[14px] placeholder:text-[#C4C4C4] placeholder:font-normal justify-center'/>
                         <FaSearch className=' absolute top-[50%] right-8 translate-y-[-50%] text-[14px]'/>
                     </div>
                 </div>
 
-                <div className=" lg:w-[30%] w-[55%] flex relative justify-end gap-x-[30px] order-2 lg:order-3">
+                <div className=" lg:w-[30%] w-[55%] flex relative justify-end gap-x-[30px] order-3 lg:order-3">
                 <div className="">
-                    <div className="flex" ref={accountref}>
+                    <div className="flex cursor-pointer" ref={accountref}>
                         <FaUser/>
                         <TiArrowSortedDown/>
                     </div>

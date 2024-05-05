@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Container from './Container'
 import Flex from './Flex'
 import logo from "../assets/Logo.png"
-import { RxCross2 } from "react-icons/rx";
+import { ImCross } from "react-icons/im";
 import { FaBars } from "react-icons/fa";
 
 
 const Header = () => {
 
     let [show, setShow] = useState (false)
+
+    let showref = useRef()
+
+    useEffect(()=>{
+        document.addEventListener("click",(e)=>{
+            if(showref.current.contains(e.target) == true){
+                setShow(!show)
+            }else{
+                setShow(false)
+            }
+        })
+    },[show])
+
 
   return (
     <section className='h-[80px] items-center bg-[#FFFFFF]'>
@@ -18,16 +31,17 @@ const Header = () => {
                 <a href="#"><img src={logo} alt="" /></a>
             </div>
             <div className="lg:w-[60%]">
-                <ul className={`lg:flex lg:gap-x-10 py-4 font-dmsans text-[14px] font-bold text-[#767676] lg:static ${show == true ? "bg-[green] text-white  w-[200px] pl-[5%] absolute top-[60px] left-0 duration-700 ease-in-out z-[1]": " w-[200px] absolute top-[-200px] left-[-200px] duration-700 ease-in-out"}`}>
-                    <li className='py-2'><a className='hover:text-[#262626]' href="#">Home</a></li>
-                    <li className='py-2'><a className='hover:text-[#262626]' href="#">Shop</a></li>
-                    <li className='py-2'><a className='hover:text-[#262626]' href="#">About</a></li>
-                    <li className='py-2'><a className='hover:text-[#262626]' href="#">Contacts</a></li>
-                    <li className='py-2'><a className='hover:text-[#262626]' href="#">Journal</a></li>
+                <ul className={`lg:flex lg:gap-x-10 lg:pt-0 pt-[70px] font-dmsans text-[14px] font-bold text-[#767676] lg:static ${show == true ? "bg-[#F5F5F3] text-[#767676]  w-[180px] pl-[5%] h-full absolute top-0 left-0 duration-700 ease-in-out z-[1]" : " w-[180px] h-full absolute top-0 left-[-200px] duration-700 ease-in-out z-[1]"}`}>
+                    <ImCross className='text-[24px] justify-end absolute top-3 right-3 lg:hidden cursor-pointer'/>
+                    <li className='py-2 lg:hover:pl-0 hover:pl-[10%] duration-700 ease-in-out'><a className='hover:text-[#262626]' href="#">Home</a></li>
+                    <li className='py-2 lg:hover:pl-0 hover:pl-[10%] duration-700 ease-in-out'><a className='hover:text-[#262626]' href="#">Shop</a></li>
+                    <li className='py-2 lg:hover:pl-0 hover:pl-[10%] duration-700 ease-in-out'><a className='hover:text-[#262626]' href="#">About</a></li>
+                    <li className='py-2 lg:hover:pl-0 hover:pl-[10%] duration-700 ease-in-out'><a className='hover:text-[#262626]' href="#">Contacts</a></li>
+                    <li className='py-2 lg:hover:pl-0 hover:pl-[10%] duration-700 ease-in-out'><a className='hover:text-[#262626]' href="#">Journal</a></li>
                 </ul>
             </div>
-            <div className="lg:hidden text-[30px]" onClick={()=> setShow (!show) }>
-                {show == true ? <RxCross2/> : <FaBars/>}
+            <div className="lg:hidden text-[30px]" ref={showref}>
+                <FaBars className=' cursor-pointer'/>
             </div>
         </Flex>
     </Container>
