@@ -8,7 +8,7 @@ export default {
     extend: {},
     fontFamily: {
       'dmsans': ['DM Sans', 'sans-serif'],
-    }
+    },
   },
   plugins: [],
 }

@@ -81,7 +81,7 @@ const Navbar = () => {
                         <TiArrowSortedDown/>
                     </div>
 
-                    {accountShow && <div className="absolute top-[25px] right-0 z-[1] h-[100px] w-[203px]">
+                    {accountShow && <div className="absolute top-[25px] right-0 z-[1] h-[100px] w-[203px] bg-[#FFF]">
                         <div className="">
                                 <p className='py-[17px] px-[60px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>My Account</p>
                         </div>
@@ -109,7 +109,7 @@ const Navbar = () => {
                     </div>
                     
 
-                    <div className="w-full pt-[14px] px-[22px] pb-[20px]">
+                    <div className="w-full pt-[14px] px-[22px] pb-[20px] bg-[#FFF]">
                         <div className="">
                             <h4 className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$44.00</span></h4>
                         </div>
