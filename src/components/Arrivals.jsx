@@ -21,12 +21,12 @@ const Arrivals = () => {
             </div>
             <Flex className="mt-[48px] justify-between">
                 <div className=" w-[24%]">
-                    <div className=" relative">
+                    <div className=" relative group">
                         <img src={product1Img} alt="Product1"/>
                         <div className="">
                             <p className=' absolute top-5 left-5 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'>10%</p>
                         </div>
-                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 hover:opacity-[1] transition duration-700 ease-in-out">
+                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] transition duration-700 ease-in-out opacity-0 group-hover:opacity-[1]">
                             <div className="flex items-center gap-x-2 text-end justify-end">
                                 <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] transition duration-700 ease-in-out'>Add to Wish List</p>
                                 <FaHeart/>
@@ -47,12 +47,12 @@ const Arrivals = () => {
                     </div>
                 </div>
                 <div className=" w-[24%]">
-                    <div className=" relative">
+                    <div className=" relative group">
                         <img src={product2Img} alt="Product2" />
                         <div className="">
                             <p className=' absolute top-5 left-5 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'>New</p>
                         </div>
-                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 hover:opacity-[1] transition duration-700 ease-in-out">
+                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 group-hover:opacity-[1] transition duration-700 ease-in-out">
                             <div className="flex items-center gap-x-2 text-end justify-end">
                                 <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] transition duration-700 ease-in-out'>Add to Wish List</p>
                                 <FaHeart/>
@@ -76,12 +76,12 @@ const Arrivals = () => {
                     </div>
                 </div>
                 <div className=" w-[24%]">
-                    <div className=" relative">
+                    <div className=" relative group">
                         <img src={product3Img} alt="Product3" />
                         <div className="">
                             <p className=' absolute top-5 left-5 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'>New</p>
                         </div>
-                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 hover:opacity-[1] transition duration-700 ease-in-out">
+                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 group-hover:opacity-[1] transition duration-700 ease-in-out">
                             <div className="flex items-center gap-x-2 text-end justify-end">
                                 <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] transition duration-700 ease-in-out'>Add to Wish List</p>
                                 <FaHeart/>
@@ -105,12 +105,12 @@ const Arrivals = () => {
                     </div>
                 </div>
                 <div className=" w-[24%]">
-                    <div className=" relative">
+                    <div className=" relative group">
                         <img className='w-full' src={product4Img} alt="Product4" />
                         <div className="">
                             <p className=' absolute top-5 left-5 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'>New</p>
                         </div>
-                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 hover:opacity-[1] transition duration-700 ease-in-out">
+                        <div data-aos="fade-up" className=" absolute w-full bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 group-hover:opacity-[1] transition duration-700 ease-in-out">
                             <div className="flex items-center gap-x-2 text-end justify-end">
                                 <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] transition duration-700 ease-in-out'>Add to Wish List</p>
                                 <FaHeart/>

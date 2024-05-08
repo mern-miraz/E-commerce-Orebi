@@ -28,19 +28,25 @@ const Navbar = () => {
             if(catref.current.contains(e.target) == true){
                         setCatShow (!catShow)
             }else{
-                setCatShow (false)
+                if(e.target.tagName !== "LI"){
+                    setCatShow (false)
+                }
             }
 
             if(cartref.current.contains(e.target) == true){
                 setCartSHow (!cartShow)
             }else{
-                setCartSHow (false)
+                if(e.target.tagName !== "DIV"){
+                    setCartSHow (false)
+                }
             }
 
             if(accountref.current.contains(e.target) == true){
                 setAccountShow(!accountShow)
             }else{
-                setAccountShow(false)
+                if(e.target.tagName !== "DIV"){
+                    setAccountShow(false)
+                }
             }
         })
     },[catShow,cartShow,accountShow])
