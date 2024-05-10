@@ -20,23 +20,23 @@ const Arrivals = () => {
             </div>
             <Flex className="mt-[48px] justify-between flex-wrap">
                 {data.map((item)=>(
-                <div className=" w-[24%] ">
+                <div className="xl:w-[24%] lg:w-[3%] w-[49%]">
                     <div className=" relative group overflow-hidden">
-                        <img className='w-full h-[350px]' src={item.thumbnail} alt="Product4" />
+                        <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
                         <div className="">
                             <p className=' absolute top-5 left-5 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
                         </div>
                         <div data-aos="fade-up" className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] pr-[30px] py-[26px] opacity-0 group-hover:opacity-[1] duration-700 ease-in-out">
                             <div className="flex items-center gap-x-2 text-end justify-end">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] transition duration-700 ease-in-out'>Add to Wish List</p>
+                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Wish List</p>
                                 <FaHeart/>
                             </div>
                             <div className=" flex items-center gap-x-2 text-end justify-end mt-5">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] transition duration-700 ease-in-out'>Compare</p>
+                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626]  duration-500 ease-in-out'>Compare</p>
                                 <IoGitCompareSharp/>
                             </div>
                             <div className=" flex items-center gap-x-2 justify-end mt-5">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] transition duration-700 ease-in-out'>Add to Cart</p>
+                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Cart</p>
                                 <FaShoppingCart/>
                             </div>
                         </div>
