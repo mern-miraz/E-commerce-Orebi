@@ -6,3 +6,25 @@
     border-right: 4px solid #262626 !important;
     color: #262626 !important;
 }
+
+@media(max-width:640px){
+    .slick-dots{
+        left: 0 !important;
+    }
+    .slickactive{
+        padding: 0 !important;
+    }
+    
+}
+@media (min-width:641px) and (max-width:768px){
+    .slick-dots{
+        left: 10px !important;
+    }
+
+}
+@media (min-width:769px) and (max-width:1024px){
+    .slick-dots{
+        left: 50px !important;
+    }
+
+}
