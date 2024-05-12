@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Container from './Container'
-import Flex from './Flex'
 import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
 import { FaSearch,FaUser,FaCartPlus  } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
