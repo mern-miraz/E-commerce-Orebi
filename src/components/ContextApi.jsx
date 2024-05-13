@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { createContext } from 'react'
 let apiData = createContext()
 
+
 const ContextApi = ({children}) => {
 
     let [info, setInfo] = useState([])
