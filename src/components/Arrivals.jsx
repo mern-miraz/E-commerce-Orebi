@@ -5,12 +5,40 @@ import { FaHeart } from "react-icons/fa";
 import { TfiReload } from "react-icons/tfi";
 import { FaShoppingCart } from "react-icons/fa";
 import { apiData } from './ContextApi'
+import Slider from "react-slick";
+import { FaLongArrowAltLeft,FaLongArrowAltRight } from "react-icons/fa";
 
+
+
+
+function SampleNextArrow(props) {
+    const {onClick } = props;
+    return (
+      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] left-[-30px] z-50'
+      ><FaLongArrowAltLeft className=' text-[24px] text-white'/></div>
+    );
+  }
+  
+  function SamplePrevArrow(props) {
+    const {onClick } = props;
+    return (
+      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] right-[-24px] z-50'
+      > <FaLongArrowAltRight className=' text-[24px] text-white'/> </div>
+    );
+  }
 
 
 
 const Arrivals = () => {
     let data = useContext(apiData)
+    var settings = {
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
+      };
 
   return (
     <section className='lg:py-[120px] py-8 px-2'>
@@ -18,9 +46,9 @@ const Arrivals = () => {
             <div className="">
                 <h3 className=' font-dmsans text-[39px] font-bold text-[#262626]'>New Arrivals</h3>
             </div>
-            <Flex className="lg:mt-[48px] mt-3 justify-between flex-wrap">
-                {data.map((item)=>(
-                <div className="xl:w-[24%] md:w-[32.5%] w-[48%] cursor-pointer">
+            <Slider {...settings}>
+            {data.map((item)=>(
+                    <div className="xl:w-[96%] md:w-[32.5%] w-[48%] cursor-pointer">
                     <div className=" relative group overflow-hidden">
                         <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
                         <div className="">
@@ -50,6 +78,12 @@ const Arrivals = () => {
                     </div>
                 </div>
                 ))}
+                </Slider>
+
+
+
+            <Flex className="lg:mt-[48px] mt-3 flex-wrap justify-between">
+            
             </Flex>
         </Container>
     </section>
