@@ -1,8 +1,8 @@
-import About from "./components/pages/About";
-import Contacts from "./components/pages/Contacts";
-import Home from "./components/pages/Home"
-import Journal from "./components/pages/Journal";
-import Shop from "./components/pages/Shop";
+import About from "./pages/About";
+import Contacts from "./pages/Contacts";
+import Home from "./pages/Home"
+import Journal from "./pages/Journal";
+import Shop from "./pages/Shop";
 import RootLayout from "./components/root/RootLayout";
 
 import {

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import Container from './Container'
-import Flex from './Flex'
 import { FaHeart } from "react-icons/fa";
 import { TfiReload } from "react-icons/tfi";
 import { FaShoppingCart } from "react-icons/fa";
@@ -41,14 +40,14 @@ const Arrivals = () => {
       };
 
   return (
-    <section className='lg:py-[120px] py-8 px-2'>
+    <section className='lg:py-[70px] py-8 px-2'>
         <Container>
-            <div className="">
+            <div className="w-full">
                 <h3 className=' font-dmsans text-[39px] font-bold text-[#262626]'>New Arrivals</h3>
             </div>
             <Slider {...settings}>
             {data.map((item)=>(
-                    <div className="xl:w-[96%] md:w-[32.5%] w-[48%] cursor-pointer">
+                    <div className="!w-[95%] cursor-pointer mt-[28px]">
                     <div className=" relative group overflow-hidden">
                         <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
                         <div className="">
@@ -76,15 +75,9 @@ const Arrivals = () => {
                     <div className=" mt-2">
                         <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
                     </div>
-                </div>
+                    </div>
                 ))}
                 </Slider>
-
-
-
-            <Flex className="lg:mt-[48px] mt-3 flex-wrap justify-between">
-            
-            </Flex>
         </Container>
     </section>
   )
