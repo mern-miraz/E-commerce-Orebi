@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Container from './Container'
 import Flex from './Flex'
 import { IoIosArrowForward } from "react-icons/io";
@@ -21,6 +21,51 @@ const ShopProducts = () => {
 
     let data = useContext(apiData)
 
+    let [category,setCategory] = useState (false)
+    let [color,setColor] = useState (false)
+    let [barnd,setBrand] = useState (false)
+    let [price,setPrice] = useState (false)
+
+
+    let categoryref = useRef()
+    let coloref = useRef()
+    let brandref = useRef()
+    let priceref = useRef ()
+
+
+
+    useEffect(()=>{
+            document.addEventListener("click",(e)=>{
+                    if(categoryref.current.contains(e.target) == true){
+                        setCategory(!category)
+                    }else{
+                        if(e.target.tagName !== "LI"){
+                            setCategory(false)
+                        }
+                    }
+
+                    if(coloref.current.contains(e.target) == true){
+                        setColor(!color)
+                    }else{
+                        setColor(false)
+                    }
+
+                    if(brandref.current.contains(e.target) == true){
+                        setBrand(!barnd)
+                    }else{
+                        setBrand(false)
+                    }
+
+
+                    if(priceref.current.contains(e.target) == true){
+                        setPrice(!price)
+                    }else{
+                        setPrice(false)
+                    }
+
+            })
+    },[category,color,barnd,price])
+
   return (
     <section>
         <Container>
@@ -32,45 +77,47 @@ const ShopProducts = () => {
                 </div>
             <Flex className="mt-[100px] justify-between">
                 <div className=" w-[20%]">
-                    <div className="">
-                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626]'>Shop by Category</h3>
-                        <ul className=''>
+                    <div className=" cursor-pointer" ref={categoryref}>
+                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626]' >Shop by Category</h3>
+                        {category && <ul className=''>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 1 <FaPlus/></li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 2</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 3 <FaPlus/></li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 4</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 5</li>
-                        </ul>
+                        </ul>}
+                        
                     </div>
-                    <div className=" mt-[50px]">
-                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Color <TiArrowSortedDown/> <TiArrowSortedUp/></h3>
-                        <ul className=''>
+                    <div className=" mt-[50px] cursor-pointer" ref={coloref}>
+                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Color {color == true ?<TiArrowSortedDown/> : <TiArrowSortedUp/>} </h3>
+                        {color && <ul className=''>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'> <p className='h-3 w-3 rounded-full bg-[#000000] mr-[10px]'/> Color 1</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#FF8686] mr-[10px]'/> Color 2</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#7ED321] mr-[10px]'/> Color 3</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#B6B6B6] mr-[10px]'/> Color 4</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#15CBA5] mr-[10px]'/> Color 5</li>
-                        </ul>
+                        </ul>}
                     </div>
-                    <div className=" mt-[50px]">
-                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Brand <TiArrowSortedDown/> <TiArrowSortedUp/></h3>
-                        <ul>
+                    <div className=" mt-[50px] cursor-pointer" ref={brandref}>
+                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Brand {barnd == true ?<TiArrowSortedDown/> : <TiArrowSortedUp/>} </h3>
+                        {barnd && <ul>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 1</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 2</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 3</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 4</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 5</li>
-                        </ul>
+                        </ul>}
                     </div>
-                    <div className=" mt-[50px]">
+                    <div className=" mt-[50px] cursor-pointer" ref={priceref}>
                         <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Price</h3>
-                        <ul>
+                        {price && <ul>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$0.00 - $9.99</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$10.00 - $19.99</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$20.00 - $29.99</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$30.00 - $39.99</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$40.00 - $69.99</li>
-                        </ul>
+                        </ul>}
+                        
                     </div>
                 </div>
 
@@ -134,6 +181,26 @@ const ShopProducts = () => {
                     </div>
                     </div>
                 ))}
+                </Flex>
+
+                <Flex className=" justify-between py-[50px]">
+                    <div className=" w-[50%]">
+                        <div className=' flex'>
+                            <ul className=' flex justify-between gap-x-4'>
+                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">1</li>
+                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">2</li>
+                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">3</li>
+                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">4</li>
+                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">...</li>
+                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className=" w-[50%] flex justify-end">
+                        <div className="">
+                            <h2 className='font-dmsans text-[14px] font-normal leading-[30px] text-[#767676]'>Products from 1 to 12 of 80</h2>
+                        </div>
+                    </div>
                 </Flex>
                 </div>
 
