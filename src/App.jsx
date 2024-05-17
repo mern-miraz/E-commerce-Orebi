@@ -10,17 +10,20 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-const router = createBrowserRouter(createRoutesFromElements(
-  <Route element={<RootLayout/>}>
-    <Route path="/" element={<Home/>}/>
-    <Route path="/shop" element={<Shop/>}/>
-    <Route path="/about" element={<About/>}/>
-    <Route path="/contacts" element={<Contacts/>}/>
-    <Route path="/journal" element={<Journal/>}/>
-  </Route>
-))
 
 function App() {
+
+  const router = createBrowserRouter(createRoutesFromElements(
+    <>
+      <Route element={<RootLayout/>}>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/shop" element={<Shop/>}/>
+      <Route path="/about" element={<About/>}/>
+      <Route path="/contacts" element={<Contacts/>}/>
+      <Route path="/journal" element={<Journal/>}/>
+      </Route>
+    </>
+  ))
 
   return (
     <>

@@ -16,7 +16,8 @@ const Footer = () => {
             <div className="lg:w-[15%] w-[30%]">
               <h3 className='font-dmsans text-[16px] font-bold text-[#262626] uppercase leading-[23px]'>menu</h3>
               <ul className='mt-4'>
-                <li className='font-dmsans text-[14px] font-normal text-[#6D6D6D] leading-[23px] py-1'><Link to="/">Home</Link></li>
+                <li className='font-dmsans text-[14px] font-normal text-[#6D6D6D] leading-[23px] py-1'>
+                <Link to="/"  >Home</Link></li>
                 <li className='font-dmsans text-[14px] font-normal text-[#6D6D6D] leading-[23px] py-1'>
                 <Link to="/shop">Shop</Link>
                 </li>
