@@ -19,7 +19,7 @@ const Footer = () => {
                 <li className='font-dmsans text-[14px] font-normal text-[#6D6D6D] leading-[23px] py-1'>
                 <Link to="/"  >Home</Link></li>
                 <li className='font-dmsans text-[14px] font-normal text-[#6D6D6D] leading-[23px] py-1'>
-                <Link to="/shop">Shop</Link>
+                <Link to="/product">Shop</Link>
                 </li>
 
                 <li className='font-dmsans text-[14px] font-normal text-[#6D6D6D] leading-[23px] py-1'>

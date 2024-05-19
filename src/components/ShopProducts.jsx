@@ -17,62 +17,38 @@ import { FaShoppingCart } from "react-icons/fa";
 
 
 
+
 const ShopProducts = () => {
 
     let data = useContext(apiData)
+
+    let [currentPage, setCurrentPage] = useState (1)
+    let [perPage, setPerPage] = useState (6)
+
+    let  lastPage = currentPage * perPage
+    let  firstPage = lastPage - perPage
+    
+    let allData = data.slice(firstPage,lastPage)
+
+    let pageNumber = []
+
+    for( let i = 0; i < Math.ceil(data.length / perPage); i++){
+        pageNumber.push(i)
+    }
+
 
     let [category,setCategory] = useState (false)
     let [color,setColor] = useState (false)
     let [barnd,setBrand] = useState (false)
     let [price,setPrice] = useState (false)
 
-
-    // let categoryref = useRef()
-    // let coloref = useRef()
-    // let brandref = useRef()
-    // let priceref = useRef ()
-
-
-
-    // useEffect(()=>{
-    //         document.addEventListener("click",(e)=>{
-    //                 if(categoryref.current.contains(e.target) == true){
-    //                     setCategory(!category)
-    //                 }else{
-    //                     if(e.target.tagName !== "LI"){
-    //                         setCategory(false)
-    //                     }
-    //                 }
-
-    //                 if(coloref.current.contains(e.target) == true){
-    //                     setColor(!color)
-    //                 }else{
-    //                     setColor(false)
-    //                 }
-
-    //                 if(brandref.current.contains(e.target) == true){
-    //                     setBrand(!barnd)
-    //                 }else{
-    //                     setBrand(false)
-    //                 }
-
-
-    //                 // if(priceref.current.contains(e.target) == true){
-    //                 //     setPrice(!price)
-    //                 // }else{
-    //                 //     setPrice(false)
-    //                 // }
-
-    //         })
-    // },[category,color,barnd,price])
-
   return (
-    <section>
+    <section className='bg-[#F5F5F3]'>
         <Container>
-                <div className=" mt-[100px]">
+                <div className=" mt-[30px]">
                     <div className="">
                         <h3 className='font-dmsans text-[49px] font-bold text-[#262626]'>Products</h3>
-                        <p className='font-dmsans text-[12px] font-normal text-[#767676] flex items-center'> <Link to="/">Home</Link> <IoIosArrowForward/> <Link to="/shop">Products</Link> </p>
+                        <p className='font-dmsans text-[12px] font-normal text-[#767676] flex items-center'> <Link to="/">Home</Link> <IoIosArrowForward/> <Link to="/product">Products</Link> </p>
                     </div>
                 </div>
             <Flex className="mt-[100px] justify-between">
@@ -122,8 +98,8 @@ const ShopProducts = () => {
                 </div>
 
                 <div className=" w-[77%]">
-                    <Flex>
-                        <div className=" w-[40%]">
+                    <div className=" flex">
+                    <div className=" w-[40%]">
                             <div className=" flex items-center gap-x-10">
                                 <div className=" p-3 border-2 hover:bg-[#262626] hover:border-transparent hover:text-[#FFFFFF] text-[#737373]">
                                 <IoGrid className='text-[32px]'/> 
@@ -147,13 +123,16 @@ const ShopProducts = () => {
                                 <TiArrowSortedDown/>
                             </div>
                         </div>
-                    </Flex>
+                    </div>
 
-                <Flex className=" flex-wrap justify-between">
-                {data.map((item)=>(
-                    <div className=" w-[32%] cursor-pointer mt-[28px]">
+                
+            <Flex className=" flex-wrap justify-between">
+                {allData.map((item)=>(
+                <div className=" !w-[32%] cursor-pointer mt-[28px]">
+                    <Link to={`/product/${item.id}`}>
+                    <div className="p-5 bg-[#FFFF]">
                     <div className=" relative group overflow-hidden">
-                        <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
+                        <img className='w-full lg:h-[300px] h-[200px]' src={item.thumbnail} alt="Product4" />
                         <div className="">
                             <p className=' absolute lg:top-5 lg:left-5 top-1 left-1 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
                         </div>
@@ -180,21 +159,45 @@ const ShopProducts = () => {
                         <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
                     </div>
                     </div>
+                    </Link>
+                </div>
                 ))}
-                </Flex>
+            </Flex>
+                
 
                 <Flex className=" justify-between py-[50px]">
                     <div className=" w-[50%]">
-                        <div className=' flex'>
-                            <ul className=' flex justify-between gap-x-4'>
-                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">1</li>
-                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">2</li>
-                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">3</li>
-                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">4</li>
-                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">...</li>
-                                <li className="font-dmsans text-[14px] font-normal py-[9px] px-[16px] border-2 border-[#F0F0F0] text-[#767676] hover:bg-[#262626] hover:text-[#FFFF] hover:border-transparent">10</li>
-                            </ul>
-                        </div>
+                    <>
+  <nav aria-label="Page navigation example">
+    <ul className="inline-flex -space-x-px text-sm cursor-pointer">
+      <li onClick={()=>setCurrentPage (currentPage-1)}>
+        <a
+          className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        >
+          Previous
+        </a>
+      </li>
+      {pageNumber.map((item)=>(
+      <li onClick={()=> setCurrentPage(item + 1)}>
+        <a
+          className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        >
+          {item + 1}
+        </a>
+      </li>
+      ))}
+      <li onClick={()=>setCurrentPage(currentPage+1)}>
+        <a
+          className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        >
+          Next
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</>
+
                     </div>
                     <div className=" w-[50%] flex justify-end">
                         <div className="">

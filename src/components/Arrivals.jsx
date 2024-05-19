@@ -6,6 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { apiData } from './ContextApi'
 import Slider from "react-slick";
 import { FaLongArrowAltLeft,FaLongArrowAltRight } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,7 +33,7 @@ const Arrivals = () => {
     let data = useContext(apiData)
     var settings = {
         infinite: true,
-        speed: 500,
+        speed: 300,
         slidesToShow: 4,
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
@@ -47,6 +48,7 @@ const Arrivals = () => {
             </div>
             <Slider {...settings}>
             {data.map((item)=>(
+                <Link to="/product">  
                     <div className="!w-[95%] cursor-pointer mt-[28px]">
                     <div className=" relative group overflow-hidden">
                         <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
@@ -76,6 +78,7 @@ const Arrivals = () => {
                         <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
                     </div>
                     </div>
+                </Link>
                 ))}
                 </Slider>
         </Container>
