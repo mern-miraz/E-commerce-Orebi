@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 function SampleNextArrow(props) {
     const {onClick } = props;
     return (
-      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] left-[-30px] z-50'
+      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] lg:left-[-30px] z-50'
       ><FaLongArrowAltLeft className=' text-[24px] text-white'/></div>
     );
   }
@@ -22,7 +22,7 @@ function SampleNextArrow(props) {
   function SamplePrevArrow(props) {
     const {onClick } = props;
     return (
-      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] right-[-24px] z-50'
+      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] lg:right-[-24px] right-0 z-50'
       > <FaLongArrowAltRight className=' text-[24px] text-white'/> </div>
     );
   }
@@ -38,6 +38,15 @@ const Arrivals = () => {
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
+        responsive: [
+            {
+              breakpoint: 640,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              }
+            },
+          ]
       };
 
   return (
@@ -49,7 +58,7 @@ const Arrivals = () => {
             <Slider {...settings}>
             {data.map((item)=>(
                 <Link to="/product">  
-                    <div className="!w-[95%] cursor-pointer mt-[28px]">
+                    <div className=" cursor-pointer mt-[28px] px-2 ">
                     <div className=" relative group overflow-hidden">
                         <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
                         <div className="">

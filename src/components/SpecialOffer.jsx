@@ -13,7 +13,7 @@ const SpecialOffer = () => {
         <div className=" w-full">
                 <h3 className=' font-dmsans text-[39px] font-bold text-[#262626]'>Special Offer</h3>
             </div>
-            <Flex className=" justify-between">
+            <Flex className=" justify-between flex-wrap">
             <div className="xl:w-[24%] md:w-[32.5%] w-[48%] cursor-pointer mt-[28px]">
                     <div className=" relative">
                         <img className='w-full lg:h-[350px] h-[200px]' src={offerImg1} alt="Product4" />
