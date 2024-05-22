@@ -8,7 +8,7 @@ import offerImg4 from "../assets/Offer4.png"
 
 const SpecialOffer = () => {
   return (
-    <section className='pb-[50px]'>
+    <section className='pb-[50px] px-3 lg:px-0'>
         <Container>
         <div className=" w-full">
                 <h3 className=' font-dmsans text-[39px] font-bold text-[#262626]'>Special Offer</h3>

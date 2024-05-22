@@ -14,16 +14,16 @@ import { Link } from 'react-router-dom';
 function SampleNextArrow(props) {
     const {onClick } = props;
     return (
-      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] lg:left-[-30px] z-50'
-      ><FaLongArrowAltLeft className=' text-[24px] text-white'/></div>
+      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] lg:right-[-30px] right-0 z-50'
+      ><FaLongArrowAltRight className=' text-[24px] text-white'/></div>
     );
   }
   
   function SamplePrevArrow(props) {
     const {onClick } = props;
     return (
-      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] lg:right-[-24px] right-0 z-50'
-      > <FaLongArrowAltRight className=' text-[24px] text-white'/> </div>
+      <div onClick={onClick} className='flex h-[64px] w-[64px] bg-[#979797] rounded-full justify-center items-center absolute top-[30%] lg:left-[-24px] left-0 z-50'
+      ><FaLongArrowAltLeft className=' text-[24px] text-white'/></div>
     );
   }
 

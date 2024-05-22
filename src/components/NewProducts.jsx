@@ -9,7 +9,7 @@ import proImg4 from "../assets/Products4.png"
 const NewProducts = () => {
   return (
     <>
-    <Container>
+    <Container className=" px-3 lg:px-0">
             <div className=" w-full">
                 <h3 className=' font-dmsans text-[39px] font-bold text-[#262626]'>New Products</h3>
             </div>
