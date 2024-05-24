@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import ProductDetails from "./pages/ProductDetails";
 import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Erorr from "./pages/Erorr";
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
       <Route path="/contacts" element={<Contacts/>}/>
       <Route path="/journal" element={<Journal/>}/>
       <Route path="/product/:id" element={<ProductDetails/>}/>
+      <Route path="/cart" element={<Cart/>}/>
+      <Route path="/*" element={<Erorr/>}/>
       </Route>
     </>
   ))
