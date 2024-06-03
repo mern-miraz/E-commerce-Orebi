@@ -168,29 +168,29 @@ const ShopProducts = () => {
                 <Flex className=" justify-between py-[50px]">
                     <div className=" w-[50%]">
                     <>
-  <nav aria-label="Page navigation example">
-    <ul className="inline-flex -space-x-px text-sm cursor-pointer">
-      <li onClick={()=> (currentPage > 1 && setCurrentPage (currentPage - 1))}>
-        <Link
-          className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        >
-          Previous
-        </Link>
-      </li>
-      {pageNumber.map((item, i)=>(
-      <li onClick={()=> setCurrentPage(item + 1)} className={currentPage == i + 1 ? " flex items-center justify-center px-3 h-8 leading-tight text-white bg-[#262626] border border-gray-300 cursor-pointer" : " flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300"}>
-          <Link>{item + 1}</Link>
-      </li>
-      ))}
-      <li onClick={()=>(currentPage < pageNumber.length && setCurrentPage(currentPage + 1))}>
-        <Link
-          className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        >
-          Next
-        </Link>
-      </li>
-    </ul>
-  </nav>
+            <nav aria-label="Page navigation example">
+                <ul className="inline-flex -space-x-px text-sm cursor-pointer">
+                <li onClick={()=> (currentPage > 1 && setCurrentPage (currentPage - 1))}>
+                    <Link
+                    className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    >
+                    Previous
+                    </Link>
+                </li>
+                {pageNumber.map((item, i)=>(
+                <Link onClick={()=> setCurrentPage(item + 1)} className={currentPage == i + 1 ? " flex items-center justify-center px-3 h-8 leading-tight text-white bg-[#262626] border border-gray-300 cursor-pointer" : " flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300"}>
+                    {item + 1}
+                </Link>
+                ))}
+                <li onClick={()=>(currentPage < pageNumber.length && setCurrentPage(currentPage + 1))}>
+                    <Link
+                    className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    >
+                    Next
+                    </Link>
+                </li>
+                </ul>
+            </nav>
 
 </>
 

@@ -3,8 +3,9 @@ import Container from './Container'
 import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
 import { FaSearch,FaUser,FaCartPlus  } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
-import cartImg from "../assets/cartImg.png"
 import { ImCross } from "react-icons/im";
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,6 +13,8 @@ import { ImCross } from "react-icons/im";
 
 
 const Navbar = () => {
+
+    let data = useSelector((state)=>state.product.cartItem)
 
     let [catShow, setCatShow] = useState (false)
     let [cartShow, setCartSHow] = useState (false)
@@ -97,21 +100,22 @@ const Navbar = () => {
 
                 </div>
                 <div className=" "> 
-
             <div className=" cursor-pointer" ref={cartref}> <FaCartPlus/>  </div>
                 {cartShow && <div className=" absolute top-[25px] right-0 z-[1] h-[241px] w-[360px]">
-                    <div className="w-full p-5 bg-[#F5F5F3] flex">
+            {data.map((item)=>(               
+                    <div className="w-full p-2 bg-[#F5F5F3] flex">
                         <div className="">
-                            <img src={cartImg} alt="" />
+                            <img src={item.images} alt="" className='h-[100px] w-[100px]' />
                         </div>
                         <div className=" mt-[17px] ml-5">
-                            <p className='font-dmsans text-[14px] font-bold text-[#262626] '>Black Smart Watch</p>
-                            <h3 className='font-dmsans text-[14px] font-bold text-[#262626] mt-[12px]'>$44.00</h3>
+                            <p className='font-dmsans text-[14px] font-bold text-[#262626] '>{item.title}</p>
+                            <h3 className='font-dmsans text-[14px] font-bold text-[#262626] mt-[12px]'>$ {item.price} </h3>
                         </div>
                         <div className=" mt-[35px] ml-[78px]">
                             <ImCross/>
                         </div>
                     </div>
+            ))}
                     
 
                     <div className="w-full pt-[14px] px-[22px] pb-[20px] bg-[#FFF]">
@@ -121,14 +125,14 @@ const Navbar = () => {
 
                         <div className=" flex justify-around mt-[13px]">
                             <div className="">
-                                <p className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>View Cart</p>
+                                <p className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'> <Link to="/cart">View Cart</Link> </p>
                             </div>
                             <div className="">
                                 <p className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>Checkout</p>
                             </div>
                         </div>
                     </div>
-                </div>}
+            </div>}
                     
 
                 </div>

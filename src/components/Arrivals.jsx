@@ -30,6 +30,12 @@ function SampleNextArrow(props) {
 
 
 const Arrivals = () => {
+
+  let handleCart = ()=>{
+    console.log("ami");
+  }
+
+
     let data = useContext(apiData)
     var settings = {
         infinite: true,
@@ -57,13 +63,15 @@ const Arrivals = () => {
             </div>
             <Slider {...settings}>
             {data.map((item)=>(
-                <Link to="/product">  
                     <div className=" cursor-pointer mt-[28px] px-2 ">
                     <div className=" relative group overflow-hidden">
+                <Link to="/product">  
                         <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
                         <div className="">
                             <p className=' absolute lg:top-5 lg:left-5 top-1 left-1 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
-                        </div>
+                    </div>
+                    </Link>
+
                         <div className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] lg:pr-[30px] lg:py-[26px] py-3 opacity-0 group-hover:opacity-[1] duration-300 ease-in-out">
                             <div className="flex items-center gap-x-2 text-end justify-end">
                                 <p className='font-dmsans lg:text-[16px] text-[14px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Wish List</p>
@@ -74,20 +82,22 @@ const Arrivals = () => {
                                 <TfiReload/>
                             </div>
                             <div className=" flex items-center gap-x-2 justify-end lg:pt-5 pt-1">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Cart</p>
+                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out' onClick={handleCart}>Add to Cart</p>
                                 <FaShoppingCart/>
                             </div>
                         </div>
                     </div>
+                    <Link to="/product">
                     <div className=" flex justify-between mt-[24px]">
                         <div className=""><h3 className='font-dmsans text-[20px] font-bold text-[#262626]'> {item.title} </h3></div>
                         <div className=""><h3 className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>$ {item.price} </h3></div>
                     </div>
+                    </Link>
                     <div className=" mt-2">
                         <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
                     </div>
                     </div>
-                </Link>
+                
                 ))}
                 </Slider>
         </Container>
