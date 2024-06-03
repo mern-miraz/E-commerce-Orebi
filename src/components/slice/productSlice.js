@@ -17,10 +17,26 @@ export const productSlice = createSlice({
 
       }
     },
+
+    productIncrement: (state, action)=>{
+      state.cartItem[action.payload].qun += 1
+    },
+
+    productDecrement: (state, action)=>{
+      if(state.cartItem[action.payload].qun > 1){
+        state.cartItem[action.payload].qun -= 1
+      }else{
+
+      }
+    },
+
+    totalPrice: (state, action)=>{
+       state.cartItem[action.payload.price] * state.cartItem[action.payload].qun
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addToCart } = productSlice.actions
+export const { addToCart, productIncrement, productDecrement, totalPrice } = productSlice.actions
 
 export default productSlice.reducer

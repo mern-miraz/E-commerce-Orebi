@@ -31,10 +31,6 @@ function SampleNextArrow(props) {
 
 const Arrivals = () => {
 
-  let handleCart = ()=>{
-    console.log("ami");
-  }
-
 
     let data = useContext(apiData)
     var settings = {
@@ -82,7 +78,7 @@ const Arrivals = () => {
                                 <TfiReload/>
                             </div>
                             <div className=" flex items-center gap-x-2 justify-end lg:pt-5 pt-1">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out' onClick={handleCart}>Add to Cart</p>
+                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Cart</p>
                                 <FaShoppingCart/>
                             </div>
                         </div>
