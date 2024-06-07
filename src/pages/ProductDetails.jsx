@@ -4,10 +4,9 @@ import Flex from '../components/Flex'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import {IoIosArrowForward} from 'react-icons/io'
-import { FaStar, FaPlus, FaMinus, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-import { TiArrowSortedDown } from "react-icons/ti";
+import { FaStar, FaPlus, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
-import { useDispatch } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { addToCart } from '../components/slice/productSlice'
 
 
@@ -89,28 +88,6 @@ const ProductDetails = () => {
             <p className=' h-5 w-5 rounded-full bg-[#B6B6B6] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#B6B6B6] '></p>
             <p className=' h-5 w-5 rounded-full bg-[#15CBA5] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#15CBA5] '></p>
             </div>
-          </div>
-
-          <div className=" flex items-center py-4">
-            <div className="">
-              <h3 className=' font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>SIZE:</h3>
-            </div>
-            <div className=" flex items-center ms-[76px] w-[139px] h-9 border-[1px] border-[#F0F0F0] px-5 justify-between">
-              <h3 className='font-dmsans text-[16px] font-normal leading-[30px] text-[#767676]'>S</h3>
-              <TiArrowSortedDown className='font-dmsans text-[24px] font-normal text-[#767676]'/>             
-            </div>
-          </div>
-
-          <div className="flex items-center py-4 border-b-[1px] border-[#D8D8D8]">
-            <div className="">
-              <h3 className=' font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>QUANTITY:</h3>
-            </div>
-            <div className="flex items-center ms-[29px] w-[139px] h-9 border-[1px] border-[#F0F0F0] px-5 justify-between">
-                <FaMinus />
-                <h3>1</h3>
-                <FaPlus/>
-              </div>
-
           </div>
 
           <div className=" flex items-center py-6 border-b-[1px] border-[#D8D8D8]">

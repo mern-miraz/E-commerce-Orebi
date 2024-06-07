@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus, FaMinus  } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
-import { productDecrement, productIncrement } from '../components/slice/productSlice';
+import { productDecrement, productIncrement, productRemove } from '../components/slice/productSlice';
 
 
 const Cart = () => {
@@ -19,10 +19,9 @@ const Cart = () => {
     dispatch(productDecrement(index))
   }
 
-  // let totalPrice = (index) => {
-  //   dispatch(totalPrice(index))
-  // }
-
+  let handleRemove = (index) => {
+    dispatch(productRemove(index))
+  }
 
   return (
     <Container>
@@ -48,10 +47,14 @@ const Cart = () => {
           <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] text-start'>Total</h3>
         </div>
       </div>
-      {data.map((item, index)=>(     
-      <div className="h-[150px] flex items-center">
+
+
+    <div className="">
+    {data.map((item, index)=>(     
+      <>
+      <div className="h-[150px] flex items-center border-[1px] border-[#F0F0F0]">
         <div className="flex items-center w-[40%]">
-          <RxCross2 className=' font-dmsans text-[20px] font-bold text-[#262626] leading-[23px] ms-3'/>
+          <RxCross2 className=' font-dmsans text-[20px] font-bold text-[#262626] leading-[23px] ms-3' onClick={ () => handleRemove(index)}/>
           <img className='h-[100px] w-[100px] ms-10' src={item.images} alt="" />
           <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>{item.title}</h3>
         </div>
@@ -69,7 +72,10 @@ const Cart = () => {
           <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] text-start'>${item.price*item.qun}</h3>
         </div>
       </div>
+      </>
     ))}
+    </div>
+
       <div className=""></div>
       </div>
     </Container>

@@ -4,8 +4,9 @@ import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
 import { FaSearch,FaUser,FaCartPlus  } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { productRemove } from './slice/productSlice';
 
 
 
@@ -15,6 +16,11 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
     let data = useSelector((state)=>state.product.cartItem)
+    let dispatch = useDispatch()
+
+    let handleRemove = (index) => {
+        dispatch(productRemove(index))
+    }
 
     let [catShow, setCatShow] = useState (false)
     let [cartShow, setCartSHow] = useState (false)
@@ -34,6 +40,7 @@ const Navbar = () => {
                     setCatShow (false)
                 }
             }
+            
 
             if(cartref.current.contains(e.target) == true){
                 setCartSHow (!cartShow)
@@ -89,7 +96,7 @@ const Navbar = () => {
                         <TiArrowSortedDown/>
                     </div>
 
-                    {accountShow && <div className="absolute top-[25px] right-0 z-[1] h-[100px] w-[203px] bg-[#FFF]">
+                    {accountShow && <div className="absolute top-[25px] right-0 z-[1] h-[100px] w-[203px] bg-[#FFF] cursor-pointer">
                         <div className="">
                                 <p className='py-[17px] px-[60px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>My Account</p>
                         </div>
@@ -102,7 +109,7 @@ const Navbar = () => {
                 <div className=" "> 
             <div className=" cursor-pointer" ref={cartref}> <FaCartPlus/>  </div>
                 {cartShow && <div className=" absolute top-[25px] right-0 z-[1] h-[241px] w-[360px]">
-            {data.map((item)=>(               
+            {data.map((item, index)=>(               
                     <div className="w-full p-2 bg-[#F5F5F3] flex">
                         <div className="">
                             <img src={item.images} alt="" className='h-[100px] w-[100px]' />
@@ -111,7 +118,7 @@ const Navbar = () => {
                             <p className='font-dmsans text-[14px] font-bold text-[#262626] '>{item.title}</p>
                             <h3 className='font-dmsans text-[14px] font-bold text-[#262626] mt-[12px]'>$ {item.price} </h3>
                         </div>
-                        <div className=" mt-[35px] ml-[78px]">
+                        <div className=" mt-[35px] ml-[78px]" onClick={ ()=> handleRemove(index)}>
                             <ImCross/>
                         </div>
                     </div>
