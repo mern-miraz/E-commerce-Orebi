@@ -12,6 +12,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Erorr from "./pages/Erorr";
+import CheckOut from "./pages/CheckOut";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path="/product/:id" element={<ProductDetails/>}/>
       <Route path="/cart" element={<Cart/>}/>
       <Route path="/*" element={<Erorr/>}/>
+      <Route path="/checkout" element={<CheckOut/>}/>
       </Route>
     </>
   ))

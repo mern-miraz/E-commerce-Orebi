@@ -1,15 +1,17 @@
 import React from 'react'
 import Container from '../components/Container'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus, FaMinus  } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
 import { productDecrement, productIncrement, productRemove } from '../components/slice/productSlice';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Cart = () => {
   let data = useSelector((state)=>state.product.cartItem)
   let dispatch = useDispatch()
+  let navigate = useNavigate()
 
   let handleIncrement = (index)=>{
     dispatch(productIncrement(index))
@@ -22,6 +24,19 @@ const Cart = () => {
   let handleRemove = (index) => {
     dispatch(productRemove(index))
   }
+
+  let handleCheckOut = () => {
+    toast("Let's go")
+    setTimeout(()=>{
+      navigate("/checkout")
+    },1500)
+  }
+
+  const {totalPrice, totalQuantity} = data.reduce((acc, item) => {
+    acc.totalPrice += item.price * item.qun
+    acc.totalQuantity  += item.qun
+    return acc
+  },{totalPrice:0,totalQuantity:0})
 
   return (
     <Container>
@@ -74,10 +89,80 @@ const Cart = () => {
       </div>
       </>
     ))}
+
+    <div className=" h-[80px] flex items-center border-2 border-[#F0F0F0] px-7">
+      <div className=" flex w-[25%]">
+        <div className="">
+    <form className="w-[200px]">
+      <label
+        htmlFor="countries"
+        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >
+      </label>
+      <select
+        id="countries"
+        className="bg-gray-50 border border-[#EAEAEA] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option selected="" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>SIZE</option>
+        <option value="US" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>S</option>
+        <option value="CA" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>M</option>
+        <option value="FR" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>L</option>
+        <option value="DE" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>XL</option>
+        <option value="DE" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>XXL</option>
+      </select>
+    </form>
+        </div>
+        <div className="">
+        </div>
+      </div>
+      <div className="w-[50%]">
+        <h3 className='font-dmsans text-[14px] font-bold text-[#262626] leading-[30px]'>Apply coupon</h3>
+      </div>
+      <div className=" w-[25%]">
+        <h3 className='text-end font-dmsans text-[14px] font-bold text-[#262626] leading-[30px]'>Update cart</h3>
+      </div>
+    </div>
     </div>
 
       <div className=""></div>
       </div>
+
+      <div className=" mt-[54px] ">
+        <div className=" flex justify-end">
+          <h3 className='font-dmsans text-[20px] font-bold text-[#262626]'>Cart totals</h3>
+        </div>
+        <div className="flex justify-end mt-6">
+            <div className="border-2 border-[#F0F0F0] w-[600px]">
+            <div className="flex border-b-2 border-[#F0F0F0]">
+              <div className="w-[300px] border-r-2 border-[#F0F0F0] h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>Subtotal</h3></div>
+              <div className="w-[300px]  h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-normal text-[#262626] leading-[30px] ms-5'>{totalPrice} $</h3></div>
+            </div>
+            <div className="flex border-b-2 border-[#F0F0F0]">
+              <div className="w-[300px] border-r-2 border-[#F0F0F0] h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>Quantity</h3></div>
+              <div className="w-[300px]  h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-normal text-[#262626] leading-[30px] ms-5'>{totalQuantity}</h3></div>
+            </div>
+            <div className="flex">
+              <div className="w-[300px] border-r-2 border-[#F0F0F0] h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>Total</h3></div>
+              <div className="w-[300px]  h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-normal text-[#262626] leading-[30px] ms-5'>{totalPrice} $</h3></div>
+            </div>
+            </div>
+        </div>
+        <div className="flex justify-end mt-6">
+          <p to="/checkout" className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent' onClick={handleCheckOut}>Proceed to Checkout</p>
+        </div>
+      </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
     </Container>
   )
 }

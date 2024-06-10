@@ -130,12 +130,12 @@ const Navbar = () => {
                             <h4 className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$44.00</span></h4>
                         </div>
 
-                        <div className=" flex justify-around mt-[13px]">
+                        <div className=" flex justify-around mt-8">
                             <div className="">
-                                <p className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'> <Link to="/cart">View Cart</Link> </p>
+                                 <Link to="/cart" className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>View Cart</Link>
                             </div>
                             <div className="">
-                                <p className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>Checkout</p>
+                                <Link className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>Checkout</Link>
                             </div>
                         </div>
                     </div>

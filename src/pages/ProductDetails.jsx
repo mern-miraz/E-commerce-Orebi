@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../components/Container'
 import Flex from '../components/Flex'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import {IoIosArrowForward} from 'react-icons/io'
 import { FaStar, FaPlus, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch} from 'react-redux'
 import { addToCart } from '../components/slice/productSlice'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
 
 
 const ProductDetails = () => {
+
+  let navigate = useNavigate()
+
+
 
   let [singleData, setSingleData] = useState([])
   let [show ,setShow] = useState(false)
@@ -30,6 +35,10 @@ const ProductDetails = () => {
 
   let handleAddToCart = (item) => {
     dispatch(addToCart({...item, qun:1}))
+    toast("Let's Cart Page")
+    setTimeout(()=>{
+      navigate("/cart")
+    },1500)
   }
 
   useEffect(()=>{
@@ -97,7 +106,7 @@ const ProductDetails = () => {
 
           <div className=" flex items-center py-6 border-b-[1px] border-[#D8D8D8]">
             <Link className='font-dmsans text-[14px] font-bold text-[#262626] py-4 px-[45px] border-[1px] border-[#262626] hover:bg-[#262626] hover:text-white ease-in-out duration-500 hover:border-transparent'>Add to Wish List</Link>
-            <Link to="/cart" className='font-dmsans text-[14px] font-bold text-[#262626] py-4 px-[45px] border-[1px] border-[#262626] hover:bg-[#262626] hover:text-white ease-in-out duration-500 hover:border-transparent ms-5' onClick={()=>handleAddToCart(singleData)}>Add to Cart</Link>
+            <p to="/cart" className='font-dmsans text-[14px] font-bold text-[#262626] py-4 px-[45px] border-[1px] border-[#262626] hover:bg-[#262626] hover:text-white ease-in-out duration-500 hover:border-transparent ms-5' onClick={()=>handleAddToCart(singleData)}>Add to Cart</p>
           </div>
 
           <div className=''>
@@ -123,6 +132,18 @@ const ProductDetails = () => {
             </div> }
           </div>
         </div>
+        <ToastContainer
+          position="top-left"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
     </Container>
   )
 }
