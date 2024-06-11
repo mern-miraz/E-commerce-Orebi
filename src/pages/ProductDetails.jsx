@@ -35,7 +35,7 @@ const ProductDetails = () => {
 
   let handleAddToCart = (item) => {
     dispatch(addToCart({...item, qun:1}))
-    toast("Let's Cart Page")
+    toast("Added Successfully to the Cart")
     setTimeout(()=>{
       navigate("/cart")
     },1500)
@@ -133,12 +133,12 @@ const ProductDetails = () => {
           </div>
         </div>
         <ToastContainer
-          position="top-left"
+          position="top-center"
           autoClose={1000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
-          rtl={false}
+          rtl
           pauseOnFocusLoss
           draggable
           pauseOnHover
