@@ -30,17 +30,44 @@ const ShopProducts = () => {
     
     let allData = data.slice(firstPage,lastPage)
 
-    let pageNumber = []
-
-    for( let i = 0; i < Math.ceil(data.length / perPage); i++){
-        pageNumber.push(i)
-    }
-
-
     let [category,setCategory] = useState (false)
     let [color,setColor] = useState (false)
     let [barnd,setBrand] = useState (false)
     let [price,setPrice] = useState (false)
+
+    let [subCategory, setSubCategory] = useState([])
+    let [categorySearcheFilter, setCategorySearcheFilter] = useState([])
+    let [filterShow, setFilterShow] = useState([])
+    let [productShow, setProductShow] = useState(true)
+
+    let pageNumber = []
+
+    for( let i = 0; i < Math.ceil(categorySearcheFilter.length > 0 ? categorySearcheFilter :  data.length / perPage); i++){
+        pageNumber.push(i)
+    }
+
+    useEffect(()=>{
+        setSubCategory([...new Set(data.map((item)=>item.category)) ])
+
+        let filterSlice = categorySearcheFilter.slice(0,5)
+        setFilterShow(filterSlice)
+    },[data, categorySearcheFilter])
+    
+    let handleCatShow = (citem)=>{
+        let categoryFilter = data.filter((item)=> item.category == citem)
+        setCategorySearcheFilter(categoryFilter)
+    }
+
+    let handleProductShow = () => {
+        setFilterShow(categorySearcheFilter) 
+        setProductShow(false)
+    }
+
+    let handleProductHide = () => {
+        let filterSlice = categorySearcheFilter.slice(0,5)
+        setFilterShow(filterSlice) 
+        setProductShow(true)
+    }
 
   return (
     <section className='bg-[#F5F5F3]'>
@@ -53,19 +80,17 @@ const ShopProducts = () => {
                 </div>
             <Flex className="mt-[100px] justify-between">
                 <div className=" w-[20%]">
-                    <div className=" cursor-pointer" onClick={()=>setCategory(!category)}>
-                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626]' >Shop by Category</h3>
+                    <div className=" cursor-pointer">
+                        <h3 onClick={()=>setCategory(!category)} className='font-dmsans text-[20px] font-bold text-[#262626]' >Shop by Category</h3>
                         {category && <ul className=''>
-                            <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 1 <FaPlus/></li>
-                            <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 2</li>
-                            <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 3 <FaPlus/></li>
-                            <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 4</li>
-                            <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px]'>Category 5</li>
+                            {subCategory.map((item)=>(
+                            <li onClick={()=>handleCatShow(item)} className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center justify-between border-b-[1px] border-[#F0F0F0] py-[20px] capitalize'>{item}<FaPlus/></li>
+                            ))}
                         </ul>}
                         
                     </div>
-                    <div className=" mt-[50px] cursor-pointer" onClick={()=>setColor(!color)}>
-                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Color {color == true ?<TiArrowSortedDown/> : <TiArrowSortedUp/>} </h3>
+                    <div className=" mt-[50px] cursor-pointer" >
+                        <h3 onClick={()=>setColor(!color)} className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Color {color == true ?<TiArrowSortedDown/> : <TiArrowSortedUp/>} </h3>
                         {color && <ul className=''>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'> <p className='h-3 w-3 rounded-full bg-[#000000] mr-[10px]'/> Color 1</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#FF8686] mr-[10px]'/> Color 2</li>
@@ -74,8 +99,8 @@ const ShopProducts = () => {
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#15CBA5] mr-[10px]'/> Color 5</li>
                         </ul>}
                     </div>
-                    <div className=" mt-[50px] cursor-pointer" onClick={()=>setBrand(!barnd)}>
-                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Brand {barnd == true ?<TiArrowSortedDown/> : <TiArrowSortedUp/>} </h3>
+                    <div className=" mt-[50px] cursor-pointer" >
+                        <h3 onClick={()=>setBrand(!barnd)} className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Brand {barnd == true ?<TiArrowSortedDown/> : <TiArrowSortedUp/>} </h3>
                         {barnd && <ul>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 1</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 2</li>
@@ -84,8 +109,8 @@ const ShopProducts = () => {
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>Brand 5</li>
                         </ul>}
                     </div>
-                    <div className=" mt-[50px] cursor-pointer" onClick={()=>setPrice(!price)}>
-                        <h3 className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Price</h3>
+                    <div className=" mt-[50px] cursor-pointer" >
+                        <h3 onClick={()=>setPrice(!price)} className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Price</h3>
                         {price && <ul>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$0.00 - $9.99</li>
                             <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$10.00 - $19.99</li>
@@ -127,41 +152,91 @@ const ShopProducts = () => {
 
                 
             <Flex className=" flex-wrap justify-between">
-                {allData.map((item)=>(
-                <div className=" !w-[32%] cursor-pointer mt-[28px]">
-                    <Link to={`/product/${item.id}`}>
-                    <div className="p-2 bg-[#FFFF]">
-                    <div className=" relative group overflow-hidden">
-                        <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
-                        <div className="">
-                            <p className=' absolute lg:top-5 lg:left-5 top-1 left-1 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
+                {categorySearcheFilter.length > 0 ?
+                    <div className="">
+                        <div className="flex flex-wrap">
+                        {filterShow.map((item)=>(
+                        <div className=" !w-[32%] cursor-pointer mt-[28px]">
+                            <Link to={`/product/${item.id}`}>
+                            <div className="p-2 bg-[#FFFF]">
+                            <div className=" relative group overflow-hidden">
+                                <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
+                                <div className="">
+                                    <p className=' absolute lg:top-5 lg:left-5 top-1 left-1 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
+                                </div>
+                                <div className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] lg:pr-[30px] lg:py-[26px] py-3 opacity-0 group-hover:opacity-[1] duration-300 ease-in-out">
+                                    <div className="flex items-center gap-x-2 text-end justify-end">
+                                        <p className='font-dmsans lg:text-[16px] text-[14px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Wish List</p>
+                                        <FaHeart/>
+                                    </div>
+                                    <div className=" flex items-center gap-x-2 text-end justify-end lg:pt-5 pt-1">
+                                        <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626]  duration-500 ease-in-out'>Compare</p>
+                                        <TfiReload/>
+                                    </div>
+                                    <div className=" flex items-center gap-x-2 justify-end lg:pt-5 pt-1">
+                                        <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Cart</p>
+                                        <FaShoppingCart/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className=" flex justify-between mt-[24px]">
+                                <div className=""><h3 className='font-dmsans text-[20px] font-bold text-[#262626]'> {item.title} </h3></div>
+                                <div className=""><h3 className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>$ {item.price} </h3></div>
+                            </div>
+                            <div className=" mt-2">
+                                <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
+                            </div>
+                            </div>
+                            </Link>
                         </div>
-                        <div className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] lg:pr-[30px] lg:py-[26px] py-3 opacity-0 group-hover:opacity-[1] duration-300 ease-in-out">
-                            <div className="flex items-center gap-x-2 text-end justify-end">
-                                <p className='font-dmsans lg:text-[16px] text-[14px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Wish List</p>
-                                <FaHeart/>
+                        ))}
+                        </div>
+
+                    <div className="mt-5 cursor-pointer">
+                        {productShow ? categorySearcheFilter.length > 5 && 
+                        <h3 onClick={handleProductShow}>Show All</h3>
+                        :
+                        <h3 onClick={handleProductHide}>Hide</h3>                     
+                    }
+                    </div>
+                    </div>
+                 :
+                 allData.map((item)=>(
+                    <div className=" !w-[32%] cursor-pointer mt-[28px]">
+                        <Link to={`/product/${item.id}`}>
+                        <div className="p-2 bg-[#FFFF]">
+                        <div className=" relative group overflow-hidden">
+                            <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
+                            <div className="">
+                                <p className=' absolute lg:top-5 lg:left-5 top-1 left-1 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
                             </div>
-                            <div className=" flex items-center gap-x-2 text-end justify-end lg:pt-5 pt-1">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626]  duration-500 ease-in-out'>Compare</p>
-                                <TfiReload/>
-                            </div>
-                            <div className=" flex items-center gap-x-2 justify-end lg:pt-5 pt-1">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Cart</p>
-                                <FaShoppingCart/>
+                            <div className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] lg:pr-[30px] lg:py-[26px] py-3 opacity-0 group-hover:opacity-[1] duration-300 ease-in-out">
+                                <div className="flex items-center gap-x-2 text-end justify-end">
+                                    <p className='font-dmsans lg:text-[16px] text-[14px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Wish List</p>
+                                    <FaHeart/>
+                                </div>
+                                <div className=" flex items-center gap-x-2 text-end justify-end lg:pt-5 pt-1">
+                                    <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626]  duration-500 ease-in-out'>Compare</p>
+                                    <TfiReload/>
+                                </div>
+                                <div className=" flex items-center gap-x-2 justify-end lg:pt-5 pt-1">
+                                    <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Cart</p>
+                                    <FaShoppingCart/>
+                                </div>
                             </div>
                         </div>
+                        <div className=" flex justify-between mt-[24px]">
+                            <div className=""><h3 className='font-dmsans text-[20px] font-bold text-[#262626]'> {item.title} </h3></div>
+                            <div className=""><h3 className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>$ {item.price} </h3></div>
+                        </div>
+                        <div className=" mt-2">
+                            <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
+                        </div>
+                        </div>
+                        </Link>
                     </div>
-                    <div className=" flex justify-between mt-[24px]">
-                        <div className=""><h3 className='font-dmsans text-[20px] font-bold text-[#262626]'> {item.title} </h3></div>
-                        <div className=""><h3 className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>$ {item.price} </h3></div>
-                    </div>
-                    <div className=" mt-2">
-                        <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
-                    </div>
-                    </div>
-                    </Link>
-                </div>
-                ))}
+                    ))
+                 }
             </Flex>
                 
 
@@ -170,18 +245,22 @@ const ShopProducts = () => {
                     <>
             <nav aria-label="Page navigation example">
                 <ul className="inline-flex -space-x-px text-sm cursor-pointer">
-                <li onClick={()=> (currentPage > 1 && setCurrentPage (currentPage - 1))}>
+                    {pageNumber.length > 0 && 
+                    <li onClick={()=> (currentPage > 1 && setCurrentPage (currentPage - 1))}>
                     <Link
                     className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                     Previous
                     </Link>
                 </li>
+                    }
+                
                 {pageNumber.map((item, i)=>(
                 <Link onClick={()=> setCurrentPage(item + 1)} className={currentPage == i + 1 ? " flex items-center justify-center px-3 h-8 leading-tight text-white bg-[#262626] border border-gray-300 cursor-pointer" : " flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300"}>
                     {item + 1}
                 </Link>
                 ))}
+                {pageNumber.length > 0 &&             
                 <li onClick={()=>(currentPage < pageNumber.length && setCurrentPage(currentPage + 1))}>
                     <Link
                     className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -189,16 +268,12 @@ const ShopProducts = () => {
                     Next
                     </Link>
                 </li>
+                }
                 </ul>
             </nav>
 
 </>
 
-                    </div>
-                    <div className=" w-[50%] flex justify-end">
-                        <div className="">
-                            <h2 className='font-dmsans text-[14px] font-normal leading-[30px] text-[#767676]'>Products from 1 to 12 of 80</h2>
-                        </div>
                     </div>
                 </Flex>
                 </div>
