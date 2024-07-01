@@ -25,7 +25,7 @@ const ShopProducts = () => {
     let dispatch = useDispatch()
 
     let [currentPage, setCurrentPage] = useState(1)
-    let [perPage, setPerPage] = useState(12)
+    let [perPage, setPerPage] = useState(9)
 
     let lastPage = currentPage * perPage
     let firstPage = lastPage - perPage

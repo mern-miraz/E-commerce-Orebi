@@ -26,7 +26,7 @@ const Header = () => {
 
 
   return (
-    <section className='h-[80px] items-center bg-[#FFFFFF] '>
+    <section className='h-[80px] items-center bg-[#FFFFFF]'>
         <Container>
         <Flex className={" lg:flex justify-between h-[80px] items-center px-3"}>
             <div className="lg:w-[40%]">

@@ -7,6 +7,8 @@ import { apiData } from './ContextApi'
 import Slider from "react-slick";
 import { FaLongArrowAltLeft,FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from './slice/productSlice';
 
 
 
@@ -33,6 +35,13 @@ const Arrivals = () => {
 
 
     let data = useContext(apiData)
+    let dispatch = useDispatch()
+
+    let handleAddCart = (item) => {
+      dispatch(addToCart({...item, qun: 1}))
+    }
+
+
     var settings = {
         infinite: true,
         speed: 300,
@@ -78,7 +87,7 @@ const Arrivals = () => {
                                 <TfiReload/>
                             </div>
                             <div className=" flex items-center gap-x-2 justify-end lg:pt-5 pt-1">
-                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Cart</p>
+                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out' onClick={ () => handleAddCart (item)}>Add to Cart</p>
                                 <FaShoppingCart/>
                             </div>
                         </div>
