@@ -16,6 +16,7 @@ import { productRemove } from './slice/productSlice';
 const Navbar = () => {
 
     let data = useSelector((state)=>state.product.cartItem)
+    console.log(data.length);
     let dispatch = useDispatch()
 
     let handleRemove = (index) => {
@@ -98,7 +99,7 @@ const Navbar = () => {
 
                     {accountShow && <div className="absolute top-[25px] right-0 z-[1] h-[100px] w-[203px] bg-[#FFF] cursor-pointer">
                         <div className="">
-                                <p className='py-[17px] px-[60px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>My Account</p>
+                                <p className='py-[17px] px-[60px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'><Link to="/myaccount">My Account</Link></p>
                         </div>
                         <div className="">
                                 <p className='py-[17px] pr-[73.5px] pl-[75.5px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>Log Out</p>
@@ -107,7 +108,14 @@ const Navbar = () => {
 
                 </div>
                 <div className=" "> 
-            <div className=" cursor-pointer" ref={cartref}> <FaCartPlus/>  </div>
+            <div className=" cursor-pointer" ref={cartref}>
+                <div className=" relative">
+                  <FaCartPlus/>
+                    
+                    {data.length > 0 ? <div className=" absolute h-[25px] w-[25px] top-[-22px] left-[8px] bg-[#767676] rounded-full text-center text-white "> {data.length} </div> : ""}
+                    
+                </div>
+                  </div>
                 {cartShow && <div className=" absolute top-[25px] right-0 z-[1] h-[241px] w-[360px]">
             {data.map((item, index)=>(               
                     <div className="w-full p-2 bg-[#F5F5F3] flex">

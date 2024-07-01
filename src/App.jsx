@@ -13,6 +13,9 @@ import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Erorr from "./pages/Erorr";
 import CheckOut from "./pages/CheckOut";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import MyAccount from "./pages/MyAccount";
 
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
       <Route path="/cart" element={<Cart/>}/>
       <Route path="/*" element={<Erorr/>}/>
       <Route path="/checkout" element={<CheckOut/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/signup" element={<Signup/>}/>
+      <Route path="/myaccount" element={<MyAccount/>}/>
       </Route>
     </>
   ))
