@@ -81,7 +81,7 @@ const ProductDetails = () => {
           </div>
           <div className=" flex items-center my-5">
               {clientRating}
-              <p className=' ms-5 font-dmsans text-[14px] font-normal text-[#767676]'>Review</p>
+              <p className=' ms-5 font-dmsans text-[14px] font-normal text-[#767676]'>{singleData.rating}</p>
           </div>
           <div className=" flex items-center gap-x-8 my-5">
             <h3 className=' font-dmsans text-[16px] font-normal text-[#767676]'>$88.00</h3>

@@ -33,7 +33,6 @@ const ShopProducts = () => {
     let allData = data.slice(firstPage, lastPage)
 
     let [category, setCategory] = useState(false)
-    let [color, setColor] = useState(false)
     let [barnd, setBrand] = useState(false)
     let [price, setPrice] = useState(false)
 
@@ -42,7 +41,6 @@ const ShopProducts = () => {
     let [filterShow, setFilterShow] = useState([])
     let [productShow, setProductShow] = useState(true)
     let [brandShow, setBrandShow] = useState([])
-    let [brandSearcheFilter, setBrandSearcheFilter] = useState([])
 
 
 
@@ -58,14 +56,18 @@ const ShopProducts = () => {
         setSubCategory([...new Set(data.map((item) => item.category))])
         setBrandShow([...new Set(data.map((item) => item.brand))])
 
-        let filterSlice = categorySearcheFilter.slice(0, 5)
-        let brandSlice = brandSearcheFilter.slice(0, 5)
-        setFilterShow(filterSlice, brandSlice)
-    }, [data, categorySearcheFilter,brandSearcheFilter])
+        let filterSlice = categorySearcheFilter.slice(0, 6)
+        setFilterShow(filterSlice)
+    }, [data, categorySearcheFilter])
 
     let handleCatShow = (citem) => {
         let categoryFilter = data.filter((item) => item.category == citem)
         setCategorySearcheFilter(categoryFilter)
+    }
+
+    let handleBrandShow = (citem) => {
+        let brandFilter = data.filter((item) => item.brand == citem )
+        setCategorySearcheFilter(brandFilter)
     }
 
     let handleProductShow = () => {
@@ -74,7 +76,7 @@ const ShopProducts = () => {
     }
 
     let handleProductHide = () => {
-        let filterSlice = categorySearcheFilter.slice(0,1)
+        let filterSlice = categorySearcheFilter.slice(0,6)
         setFilterShow(filterSlice)
         setProductShow(true)
     }
@@ -85,11 +87,6 @@ const ShopProducts = () => {
 
     let handleList = () => {
         setMultiList("activeList");
-    }
-
-    let handleBrandShow = (bitem) => {
-        let brandFilter = data.filter((item) => item.brand == bitem )
-        setBrandSearcheFilter(brandFilter)
     }
 
     return (
@@ -103,30 +100,21 @@ const ShopProducts = () => {
                 </div>
                 <Flex className="mt-[20px] justify-between">
                     <div className=" w-[20%]">
-                        <div className=" ">
+                        <div className="">
                             <h3 onClick={() => setCategory(!category)} className='font-dmsans text-[20px] font-bold text-[#262626] cursor-pointer' >Shop by Category</h3>
-                            {category && <ul className=''>
+                            {category && <ul className='h-[300px] overflow-y-scroll'>
                                 {subCategory.map((item) => (
                                     <li onClick={() => handleCatShow(item)} className={`justify-between border-b-[1px] border-[#F0F0F0] py-[5px] px-[10px] capitalize cursor-pointer "font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center bg-white hover:bg-[#262626] hover:text-white`}>{item}</li>
                                 ))}
                             </ul>}
 
                         </div>
-                        <div className=" mt-[20px] cursor-pointer" >
-                            <h3 onClick={() => setColor(!color)} className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Color {color == true ? <TiArrowSortedDown /> : <TiArrowSortedUp />} </h3>
-                            {color && <ul className=''>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'> <p className='h-3 w-3 rounded-full bg-[#000000] mr-[10px]' /> Color 1</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#FF8686] mr-[10px]' /> Color 2</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#7ED321] mr-[10px]' /> Color 3</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#B6B6B6] mr-[10px]' /> Color 4</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'><p className='h-3 w-3 rounded-full bg-[#15CBA5] mr-[10px]' /> Color 5</li>
-                            </ul>}
-                        </div>
+
                         <div className=" mt-[20px] cursor-pointer" >
                             <h3 onClick={() => setBrand(!barnd)} className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Brand {barnd == true ? <TiArrowSortedDown /> : <TiArrowSortedUp />} </h3>
-                            {barnd && <ul>
+                            {barnd && <ul className='h-[300px] overflow-y-scroll'>
                                 {brandShow.map((item)=>(
-                                <li className='justify-between border-b-[1px] border-[#F0F0F0] py-[5px] px-[10px] capitalize cursor-pointer "font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center bg-white hover:bg-[#262626] hover:text-white' onClick={ () => handleBrandShow (item)}>{item}</li>
+                                <li onClick={ () => handleBrandShow (item)} className='justify-between border-b-[1px] border-[#F0F0F0] py-[5px] px-[10px] capitalize cursor-pointer "font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] flex items-center bg-white hover:bg-[#262626] hover:text-white'>{item}</li>
                                 ))}
                             </ul>}
                         </div>
@@ -173,7 +161,7 @@ const ShopProducts = () => {
 
 
                         <Flex className=" flex-wrap justify-between">
-                            {categorySearcheFilter.length + brandSearcheFilter.length> 0 ?
+                            {categorySearcheFilter.length > 0 ?
                                 <div className="">
                                     <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between" }`}>
                                         {filterShow.map((item) => (
@@ -215,7 +203,7 @@ const ShopProducts = () => {
                                     </div>
 
                                     <div className="mt-5 cursor-pointer">
-                                        {productShow ? categorySearcheFilter.length > 5 &&
+                                        {productShow ? categorySearcheFilter.length > 6 &&
                                             <h3 onClick={handleProductShow}>Show All</h3>
                                             :
                                             <h3 onClick={handleProductHide}>Hide</h3>
@@ -224,9 +212,9 @@ const ShopProducts = () => {
                                 </div>
                                 :
 
-                                <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between" }`}>
+                                <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between " }`}>
                                 {allData.map((item) => (
-                                        <div className="  cursor-pointer mt-[28px]">
+                                        <div className="  cursor-pointer mt-[28px] w-[32%] flex justify-between">
                                         <div className="p-2 bg-[#FFFF]">
                                             <div className=" relative group overflow-hidden">
                                                 <Link to={`/product/${item.id}`}>
