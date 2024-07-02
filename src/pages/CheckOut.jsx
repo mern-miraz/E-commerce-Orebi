@@ -64,6 +64,52 @@ const CheckOut = () => {
                 </form>
             </div>
         </div>
+
+        <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center">
+                <div className="w-full">
+                    <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Street Address *</h3>
+                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full border-b-2 border-[#F0F0F0]' type="text" placeholder='House number and street name' required/>
+                </div>
+                    <div className="items-center">
+                    <input className='  outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full border-b-2 border-[#F0F0F0] py-3 ' type="text" placeholder='Apartment, suite, unit etc. (optional)'/>
+                    </div>
+        </div>
+
+
+        <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex mt-6">
+                <div className="w-full">
+                    <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Town/City *</h3>
+                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="text" placeholder='Town/City' required/>
+                </div>
+        </div>
+
+        <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
+                <div className="w-full">
+                    <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>County (optional)</h3>
+                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="text" placeholder='County'/>
+                </div>
+        </div>
+
+        <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
+                <div className="w-full">
+                    <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Post Code *</h3>
+                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="text" placeholder='Post Code' required/>
+                </div>
+        </div>
+
+        <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
+                <div className="w-full">
+                    <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Phone *</h3>
+                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="tel" placeholder='Phone' required/>
+                </div>
+        </div>
+
+        <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
+                <div className="w-full">
+                    <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Email Address *</h3>
+                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="email" placeholder='Email' required/>
+                </div>
+        </div>
             
         </div>
     </Container>
