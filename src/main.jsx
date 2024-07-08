@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ContextApi } from './components/ContextApi.jsx';
 import store from "./store.js"
 import { Provider } from 'react-redux'
+import firebaseConfig from './firebase.config.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ContextApi>

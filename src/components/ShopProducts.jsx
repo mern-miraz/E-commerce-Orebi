@@ -24,14 +24,6 @@ const ShopProducts = () => {
     let data = useContext(apiData)
     let dispatch = useDispatch()
 
-    let [currentPage, setCurrentPage] = useState(1)
-    let [perPage, setPerPage] = useState(9)
-
-    let lastPage = currentPage * perPage
-    let firstPage = lastPage - perPage
-
-    let allData = data.slice(firstPage, lastPage)
-
     let [category, setCategory] = useState(false)
     let [barnd, setBrand] = useState(false)
     let [price, setPrice] = useState(false)
@@ -42,15 +34,32 @@ const ShopProducts = () => {
     let [productShow, setProductShow] = useState(true)
     let [brandShow, setBrandShow] = useState([])
 
-
-
     let [multiList, setMultiList] = useState ('')
 
+    let [currentPage, setCurrentPage] = useState(1)
+    let [perPage, setPerPage] = useState(9)
+    let lastPage = currentPage * perPage
+    let firstPage = lastPage - perPage
+    let allData = data.slice(firstPage, lastPage)
     let pageNumber = []
-
     for (let i = 0; i < Math.ceil(categorySearcheFilter.length > 0 ? categorySearcheFilter : data.length / perPage); i++) {
         pageNumber.push(i)
     }
+
+    let nextPage = () => {
+        if(currentPage < pageNumber.length){
+            setCurrentPage((state)=>state + 1) 
+        }
+    }
+
+    let prevPage = () => {
+        if(currentPage > 1){
+            setCurrentPage((state)=>state - 1) 
+        }
+    }
+
+    
+
 
     useEffect(() => {
         setSubCategory([...new Set(data.map((item) => item.category))])
@@ -202,11 +211,11 @@ const ShopProducts = () => {
                                         ))}
                                     </div>
 
-                                    <div className="mt-5 cursor-pointer">
+                                    <div className="mt-5 cursor-pointer items-center justify-center flex relative after:absolute after:content-[''] after:h-[2px] after:w-full after:bg-[#767676] after:top-[50%] after:translate-y-[-50%] after:left-0 after:bg-from-indigo-50 after:z-10">
                                         {productShow ? categorySearcheFilter.length > 6 &&
-                                            <h3 onClick={handleProductShow}>Show All</h3>
+                                            <button className=' border-[2px] border-[#767676] rounded-3xl py-1 px-8 z-50 relative bg-white font-dmsans font-bold text-[16px] hover:bg-[#262626] hover:text-white duration-150 ease-in-out hover:border-transparent '  onClick={handleProductShow}>Show All</button>
                                             :
-                                            <h3 onClick={handleProductHide}>Hide</h3>
+                                            <button className=' border-[2px] border-[#767676] rounded-3xl py-1 px-8 z-50 relative bg-white font-dmsans font-bold text-[16px] hover:bg-[#262626] hover:text-white duration-150 ease-in-out hover:border-transparent ' onClick={handleProductHide}>Hide</button>
                                         }
                                     </div>
                                 </div>
@@ -259,14 +268,14 @@ const ShopProducts = () => {
                                 <>
                                     <nav aria-label="Page navigation example">
                                         <ul className="inline-flex -space-x-px text-sm cursor-pointer">
-                                            {pageNumber.length > 0 &&
-                                                <li onClick={() => (currentPage > 1 && setCurrentPage(currentPage - 1))}>
+                                            {currentPage > 1 ? pageNumber.length > 0 && <li onClick={prevPage}>
                                                     <Link
                                                         className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                                     >
                                                         Previous
                                                     </Link>
-                                                </li>
+                                                </li> : ""
+                                                
                                             }
 
                                             {pageNumber.map((item, i) => (
@@ -274,14 +283,14 @@ const ShopProducts = () => {
                                                     {item + 1}
                                                 </Link>
                                             ))}
-                                            {pageNumber.length > 0 &&
-                                                <li onClick={() => (currentPage < pageNumber.length && setCurrentPage(currentPage + 1))}>
+                                            {currentPage < pageNumber.length ? pageNumber.length > 0 &&
+                                                <li onClick={nextPage}>
                                                     <Link
                                                         className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                                     >
                                                         Next
                                                     </Link>
-                                                </li>
+                                                </li> : ""
                                             }
                                         </ul>
                                     </nav>

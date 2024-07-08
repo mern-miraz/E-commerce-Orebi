@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "aos": "^2.3.4",
     "axios": "^1.6.8",
+    "firebase": "^10.12.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.0",
@@ -20,7 +21,8 @@
     "react-router-dom": "^6.23.1",
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.5",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "uin": "^0.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

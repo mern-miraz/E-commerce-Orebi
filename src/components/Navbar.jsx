@@ -38,15 +38,15 @@ const Navbar = () => {
                 if (e.target.tagName !== "LI") {
                     setCatShow(false);
                 }
-            }
+            };
 
             if (cartref.current.contains(e.target)) {
                 setCartShow(!cartShow);
             } else {
-                if (e.target.tagName !== "DIV") {
+                if (e.target.tagName !== "LI") {
                     setCartShow(false);
                 }
-            }
+            };
 
             if (accountref.current.contains(e.target)) {
                 setAccountShow(!accountShow);
@@ -54,7 +54,7 @@ const Navbar = () => {
                 if (e.target.tagName !== "DIV") {
                     setAccountShow(false);
                 }
-            }
+            };
         });
     }, [catShow, cartShow, accountShow]);
 
@@ -142,12 +142,18 @@ const Navbar = () => {
                             </div>
 
                             {accountShow && <div className="absolute top-[25px] right-0 z-[1] h-[100px] w-[203px] bg-[#FFF] cursor-pointer">
-                                <div>
-                                    <p className='py-[17px] px-[60px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'><Link to="/myaccount">My Account</Link></p>
-                                </div>
-                                <div>
-                                    <p className='py-[17px] pr-[73.5px] pl-[75.5px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>Log Out</p>
-                                </div>
+                                <ul>
+                                <li>
+                                    <Link to="./myaccount">
+                                    <p className='py-[17px] px-[60px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>My Account</p>
+                                    </Link>
+                                </li>
+                                <li>
+                                <Link to="./login">
+                                    <p className='py-[17px] pr-[73.5px] pl-[75.5px] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white'>Login</p>
+                                </Link>
+                                </li>
+                                </ul>
                             </div>}
                         </div>
 
@@ -176,7 +182,7 @@ const Navbar = () => {
 
                                 <div className="w-full pt-[14px] px-[22px] pb-[20px] bg-[#FFF]">
                                     <div>
-                                        <h4 className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$44.00</span></h4>
+                                        <h4 className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$ 44.00</span></h4>
                                     </div>
 
                                     <div className="flex justify-around mt-8">
@@ -184,7 +190,7 @@ const Navbar = () => {
                                             <Link to="/cart" className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>View Cart</Link>
                                         </div>
                                         <div>
-                                            <Link className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>Checkout</Link>
+                                            <Link to="./checkout" className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>Checkout</Link>
                                         </div>
                                     </div>
                                 </div>
