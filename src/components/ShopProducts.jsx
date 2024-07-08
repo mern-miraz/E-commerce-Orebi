@@ -171,6 +171,7 @@ const ShopProducts = () => {
 
                         <Flex className=" flex-wrap justify-between">
                             {categorySearcheFilter.length > 0 ?
+                                <>
                                 <div className="">
                                     <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between" }`}>
                                         {filterShow.map((item) => (
@@ -211,14 +212,17 @@ const ShopProducts = () => {
                                         ))}
                                     </div>
 
+                                </div>
                                     <div className="mt-5 cursor-pointer items-center justify-center flex relative after:absolute after:content-[''] after:h-[2px] after:w-full after:bg-[#767676] after:top-[50%] after:translate-y-[-50%] after:left-0 after:bg-from-indigo-50 after:z-10">
                                         {productShow ? categorySearcheFilter.length > 6 &&
-                                            <button className=' border-[2px] border-[#767676] rounded-3xl py-1 px-8 z-50 relative bg-white font-dmsans font-bold text-[16px] hover:bg-[#262626] hover:text-white duration-150 ease-in-out hover:border-transparent '  onClick={handleProductShow}>Show All</button>
+                                            <div className="">
+                                                <button className=' border-[2px] border-[#767676] rounded-3xl py-1 px-8 z-50 relative bg-white font-dmsans font-bold text-[16px] hover:bg-[#262626] hover:text-white duration-150 ease-in-out hover:border-transparent '  onClick={handleProductShow}>Show All</button>
+                                            </div>
                                             :
                                             <button className=' border-[2px] border-[#767676] rounded-3xl py-1 px-8 z-50 relative bg-white font-dmsans font-bold text-[16px] hover:bg-[#262626] hover:text-white duration-150 ease-in-out hover:border-transparent ' onClick={handleProductHide}>Hide</button>
                                         }
                                     </div>
-                                </div>
+                                </>
                                 :
 
                                 <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between " }`}>
@@ -278,10 +282,14 @@ const ShopProducts = () => {
                                                 
                                             }
 
+                                            
                                             {pageNumber.map((item, i) => (
-                                                <Link onClick={() => setCurrentPage(item + 1)} className={currentPage == i + 1 ? " flex items-center justify-center px-3 h-8 leading-tight text-white bg-[#262626] border border-gray-300 cursor-pointer" : " flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300"}>
+                                                
+                                                <li>
+                                                    <Link onClick={() => setCurrentPage(item + 1)} className={currentPage == i + 1 ? " flex items-center justify-center px-3 h-8 leading-tight text-white bg-[#262626] border border-gray-300 cursor-pointer" : " flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300"}>
                                                     {item + 1}
                                                 </Link>
+                                                </li>                                                
                                             ))}
                                             {currentPage < pageNumber.length ? pageNumber.length > 0 &&
                                                 <li onClick={nextPage}>
