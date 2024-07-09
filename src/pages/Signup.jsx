@@ -39,7 +39,7 @@ const Signup = () => {
                 toast("lets go")
             setTimeout(() => {
                 navigate("/login")
-            }, 1000);
+            },1500);
               })
               .then(()=>{
                 set(ref(db, 'users/' + userId), {

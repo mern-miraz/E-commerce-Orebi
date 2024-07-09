@@ -306,6 +306,12 @@ const ShopProducts = () => {
                                 </>
 
                             </div>
+
+                            <div className="">
+                                <div className="">
+                                    <h2>Products from 1 to {perPage} of {data.length}</h2>
+                                </div>
+                            </div>
                         </Flex>
                     </div>
 
