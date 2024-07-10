@@ -74,7 +74,7 @@ const Cart = () => {
           <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>{item.title}</h3>
         </div>
         <div className="w-[20%]">
-          <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] text-start'>$ {item.price} </h3>
+          <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] text-start'>$ {item.price.toFixed()} </h3>
         </div>
         <div className="w-[20%]">
         <div className="flex items-center w-[139px] h-9 border-[1px] border-[#F0F0F0] px-5 justify-between ">
@@ -84,7 +84,7 @@ const Cart = () => {
         </div>
         </div>
         <div className="w-[20%]">
-          <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] text-start'>${item.price*item.qun}</h3>
+          <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] text-start'>${item.price.toFixed()*item.qun}</h3>
         </div>
       </div>
       </>
@@ -135,7 +135,7 @@ const Cart = () => {
             <div className="border-2 border-[#F0F0F0] w-[600px]">
             <div className="flex border-b-2 border-[#F0F0F0]">
               <div className="w-[300px] border-r-2 border-[#F0F0F0] h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>Subtotal</h3></div>
-              <div className="w-[300px]  h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-normal text-[#262626] leading-[30px] ms-5'>{totalPrice} $</h3></div>
+              <div className="w-[300px]  h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-normal text-[#262626] leading-[30px] ms-5'>{totalPrice.toFixed()} $</h3></div>
             </div>
             <div className="flex border-b-2 border-[#F0F0F0]">
               <div className="w-[300px] border-r-2 border-[#F0F0F0] h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>Quantity</h3></div>
@@ -143,13 +143,14 @@ const Cart = () => {
             </div>
             <div className="flex">
               <div className="w-[300px] border-r-2 border-[#F0F0F0] h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px] ms-5'>Total</h3></div>
-              <div className="w-[300px]  h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-normal text-[#262626] leading-[30px] ms-5'>{totalPrice} $</h3></div>
+              <div className="w-[300px]  h-[54px] flex items-center"><h3 className='font-dmsans text-[16px] font-normal text-[#262626] leading-[30px] ms-5'>{totalPrice.toFixed()} $</h3></div>
             </div>
             </div>
         </div>
-        <div className="flex justify-end mt-6">
+        {data.length > 0 ? <div className="flex justify-end mt-6">
           <p to="/checkout" className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent' onClick={handleCheckOut}>Proceed to Checkout</p>
-        </div>
+        </div> : "" }
+        
       </div>
       <ToastContainer
         position="top-center"

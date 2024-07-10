@@ -20,6 +20,7 @@ const Navbar = () => {
     };
     let [catShow, setCatShow] = useState(false);
     let [cartShow, setCartShow] = useState(false);
+    let [cartShowTwo, setCartShowTwo] = useState(true)
     let [accountShow, setAccountShow] = useState(false);
     let [searchInput, setSearchInput] = useState('');
     let [searchFilter, setSearchFilter] = useState([]);
@@ -29,6 +30,7 @@ const Navbar = () => {
     let catref = useRef();
     let cartref = useRef();
     let accountref = useRef();
+    let cartRef = useRef();
 
     useEffect(() => {
         document.addEventListener("click", (e) => {
@@ -40,23 +42,25 @@ const Navbar = () => {
                 }
             };
 
-            if (cartref.current.contains(e.target)) {
+            if ( cartref.current.contains(e.target)) {
                 setCartShow(!cartShow);
             } else {
-                if (e.target.tagName !== "LI") {
                     setCartShow(false);
-                }
             };
 
             if (accountref.current.contains(e.target)) {
                 setAccountShow(!accountShow);
             } else {
-                if (e.target.tagName !== "DIV") {
                     setAccountShow(false);
-                }
+            };
+
+            if(cartRef.current.contains(e.target)){
+                setCartShowTwo(cartShowTwo)
+            }else{
+                
             };
         });
-    }, [catShow, cartShow, accountShow]);
+    }, [catShow, cartShow, accountShow,cartShowTwo]);
 
     let handleInput = (e) => {
         setSearchInput(e.target.value);
@@ -86,15 +90,25 @@ const Navbar = () => {
         }
     };
 
+    const {totalPrice, totalQuantity} = data.reduce((acc, item) => {
+        acc.totalPrice += item.price * item.qun
+        acc.totalQuantity  += item.qun
+        return acc
+      },{totalPrice:0,totalQuantity:0})
+
     return (
         <section className='bg-[#F5F5F3] py-4 lg:py-0'>
             <Container>
                 <div className="h-[100px] items-center flex flex-wrap px-3">
                     <div className="lg:w-[30%] w-[45%] relative cursor-pointer order-2 lg:order-1">
-                        <div ref={catref} className="flex items-center gap-x-2">
+                        <div 
+                        ref={catref} 
+                        className="flex items-center gap-x-2">
+
                             <HiOutlineBars3BottomLeft className='font-dmsans text-[24px] font-bold text-[#262626]' />
                             <p className='font-dmsans text-[14px] font-bold text-[#262626]'>Shop by Category</p>
                         </div>
+
                         {catShow && <div className="absolute top-[40px] left-0 w-[263px] bg-[#262626] rounded-[2px] z-[1]">
                             <ul>
                                 <li className='pl-[21px] py-[16px] font-dmsans text-[14px] font-normal text-[#ffffffab] hover:text-[#FFFFFF] hover:font-bold hover:pl-[40px] duration-700 ease-in-out border-b-2 border-[#2D2D2D]'>Accessories</li>
@@ -110,8 +124,18 @@ const Navbar = () => {
                     <div className="lg:w-[40%] order-1 lg:order-2 w-full flex justify-center">
                         <div className="relative">
                             <div className="flex items-center">
-                                <input value={searchInput} onChange={handleInput} onKeyDown={handleKey} type='search' placeholder='Search Products' className='h-[50px] lg:w-[601px] outline-none px-5 font-dmsans text-[22px] font-bold text-[#262626] placeholder:text-[14px] placeholder:text-[#C4C4C4] placeholder:font-normal justify-center' />
-                                <FaSearch className='absolute top-[50%] right-8 translate-y-[-50%] text-[14px] cursor-pointer' />
+
+                                <input 
+                                value={searchInput}
+                                onChange={handleInput}
+                                onKeyDown={handleKey}
+                                type='search'
+                                placeholder='Search Products'
+                                className='h-[50px] lg:w-[601px] outline-none px-5 font-dmsans text-[22px] font-bold text-[#262626] placeholder:text-[14px] placeholder:text-[#C4C4C4] placeholder:font-normal justify-center' />
+
+                                <FaSearch 
+                                className='absolute top-[50%] right-8 translate-y-[-50%] text-[14px] cursor-pointer' />
+
                             </div>
                             {searchFilter.length > 0 &&
                                 <div className="absolute top-[50px] left-0 h-[400px] w-[75%] z-50 overflow-y-scroll px-5 bg-[#f1f1f1]">
@@ -157,44 +181,61 @@ const Navbar = () => {
                             </div>}
                         </div>
 
-                        <div>
+                        <div className=''>
                             <div className="cursor-pointer" ref={cartref}>
                                 <div className="relative">
                                     <FaCartPlus />
-                                    {data.length > 0 ? <div className="absolute h-[25px] w-[25px] top-[-22px] left-[8px] bg-[#767676] rounded-full text-center text-white">{data.length}</div> : ""}
+                                    {data.length ? <div className="absolute h-[25px] w-[25px] top-[-22px] left-[8px] bg-[#767676] rounded-full text-center text-white">{data.length}</div> : ""}
                                 </div>
                             </div>
-                            {cartShow && <div className="absolute top-[25px] right-0 z-[1] h-[241px] w-[360px]">
-                                {data.map((item, index) => (
-                                    <div key={index} className="w-full p-2 bg-[#F5F5F3] flex">
+                            {data.length > 0 ? cartShow && <div className="absolute top-[25px] right-0 z-[1] h-[241px] w-[360px]">
+                                <div 
+                                  className=" h-[450px] overflow-y-scroll bg-white" 
+                                  ref={cartRef}
+                                >
+                                {cartShowTwo &&
+                                <div className="">
+                                    {data.map((item, index) => (
+                                    <div 
+                                     key={index}
+                                     className="w-full p-2 bg-[#F5F5F3] flex shadow-2xl hover:drop-shadow-2xl cursor-pointer" 
+                                    >
                                         <div>
                                             <img src={item.images} alt="" className='h-[100px] w-[100px]' />
                                         </div>
                                         <div className="mt-[17px] ml-5">
                                             <p className='font-dmsans text-[14px] font-bold text-[#262626]'>{item.title}</p>
-                                            <h3 className='font-dmsans text-[14px] font-bold text-[#262626] mt-[12px]'>$ {item.price}</h3>
+                                            <h3 className='font-dmsans text-[14px] font-bold text-[#262626] mt-[12px]'>$ {item.price.toFixed()}</h3>
                                         </div>
                                         <div className="mt-[35px] ml-[78px]" onClick={() => handleRemove(index)}>
                                             <ImCross />
                                         </div>
                                     </div>
                                 ))}
+                                </div>
+                                }
+                                </div>
 
                                 <div className="w-full pt-[14px] px-[22px] pb-[20px] bg-[#FFF]">
                                     <div>
-                                        <h4 className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$ 44.00</span></h4>
+                                        <h4 className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$ {totalPrice.toFixed()}</span></h4>
                                     </div>
 
                                     <div className="flex justify-around mt-8">
                                         <div>
-                                            <Link to="/cart" className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>View Cart</Link>
+                                            <Link 
+                                            to="/cart" 
+                                            className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>View Cart</Link>
                                         </div>
                                         <div>
-                                            <Link to="./checkout" className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>Checkout</Link>
+                                            <Link 
+                                            to="./checkout" 
+                                            className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>
+                                                Checkout</Link>
                                         </div>
                                     </div>
                                 </div>
-                            </div>}
+                            </div> : ""}
                         </div>
                     </div>
                 </div>

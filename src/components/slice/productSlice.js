@@ -30,7 +30,9 @@ export const productSlice = createSlice({
     productRemove: (state, action) =>{
       state.cartItem.splice(action.payload, 1)
       localStorage.setItem("cart", JSON.stringify(state.cartItem))
-    }
+    },
+
+
 
     
   },

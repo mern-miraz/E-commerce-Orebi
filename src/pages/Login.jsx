@@ -1,11 +1,90 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Container from '../components/Container'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoIosArrowForward } from "react-icons/io";
+import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider  } from "firebase/auth";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+
+
+
 
 const Login = () => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+  let [passShow, setPassShow] = useState(false);
+  let navigate = useNavigate();
+
+  let [emailErr, setEmialErr] = useState("");
+  let [passErr, setPassErr] = useState("");
+  let [success, setSuccess] = useState("");
+
+  let handleEmail = (e) => {
+    setEmail(e.target.value);
+    setEmialErr("");
+  };
+
+  let handlePassword = (e) => {
+    setPassword(e.target.value);
+    setPassErr("");
+  };
+
+  let handleSubmit = (e) => {
+    if(!email){
+      setEmialErr("Email Field is Required");
+    };
+    if(!password){
+      setPassErr("Password Field is Required");
+    };
+
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((user) => { 
+      toast.success("Successfully Login");
+      setTimeout(() => {
+      navigate("/myaccount");
+      }, 2000);
+    })
+    .catch((error) => {
+      if(error.code.includes("auth/user-not-found")){
+
+      }else{
+        setEmialErr("Valid Email is required");
+      };
+
+      if(error.code.includes("auth/wrong-password")){
+
+      }else{
+        setPassErr("Valid password is required");
+      };
+    });
+    
+  };
+
+  
+
+
+
+
+
   return (
     <>
+
+<ToastContainer
+    position="top-center"
+    autoClose={2000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+  />
+
       <section>
         <Container>
           <div className=" pt-[5px]">
@@ -25,6 +104,8 @@ const Login = () => {
                   </h1>
                   <form className="space-y-4 md:space-y-6" action="#">
                     <div>
+                    {success ? (
+                            <p className="bg-[green] w-96 text-[#fff] py-1 mt-1">{success}</p>) : ("")}
                       <label
                         htmlFor="email"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -32,6 +113,7 @@ const Login = () => {
                         Your email
                       </label>
                       <input
+                        onChange={handleEmail}
                         type="email"
                         name="email"
                         id="email"
@@ -39,23 +121,38 @@ const Login = () => {
                         placeholder="name@company.com"
                         required=""
                       />
+                        {emailErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{emailErr}</p>) : ("") }
+
                     </div>
-                    <div>
+                    <div className='relative'>
                       <label
                         htmlFor="password"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         Password
                       </label>
+                      <div className=" relative">
                       <input
-                        type="password"
+                        onChange={handlePassword}
+                        type={passShow == true ? "text" : "password"}
                         name="password"
                         id="password"
                         placeholder="••••••••"
                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required=""
                       />
+                          {passErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{passErr}                          </p>) : ("") }
+
+                      <div 
+                        onClick={ ()=> setPassShow(!passShow)}
+                        className=" absolute top-[50%] translate-y-[-50%] right-[3%] cursor-pointer text-[20px]">
+                        
+                        {passShow == true ? <FaEye/> : <FaEyeSlash/> }
+                      </div>
+                      </div>
+
                     </div>
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-start">
                         <div className="flex items-center h-5">
@@ -84,6 +181,7 @@ const Login = () => {
                       </a>
                     </div>
                     <button
+                    onClick={handleSubmit}
                       type="submit"
                       className="w-full text-white bg-[#767676] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     >
