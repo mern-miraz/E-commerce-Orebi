@@ -8,12 +8,16 @@ const CheckOut = () => {
         <div className=" pt-[30px]">
                     <div className="">
                         <h3 className='font-dmsans text-[49px] font-bold text-[#262626]'>Cart</h3>
-                        <p className='font-dmsans text-[12px] font-normal text-[#767676] flex items-center'> <Link className='me-2' to="/">Home</Link> &gt; <Link className='ms-2' to="/checkout">Checkout</Link> </p>
+                        <p className='font-dmsans text-[12px] font-normal text-[#767676] flex items-center'> 
+                            <Link className='me-2' to="/">Home</Link>
+                             &gt; <Link className='ms-2' to="/checkout">Checkout</Link> </p>
                     </div>
         </div>
     
     <div className=" mt-14">
-        <h3 className='font-dmsans text-[16px] font-normal text-[#767676]'>Have a coupon? <span className='text-[#262626]'>Click here to enter your code</span></h3>
+        <h3 className='font-dmsans text-[16px] font-normal text-[#767676]'>
+            Have a coupon? 
+        <span className='text-[#262626]'>Click here to enter your code</span></h3>
     </div>
 
 
@@ -24,15 +28,27 @@ const CheckOut = () => {
         <div className=" flex justify-between mt-6">
             <div className=" border-b-2 border-[#F0F0F0] w-[50%] h-[70px] items-center flex">
                 <div className="">
-                    <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>First Name*</h3>
-                    <input className=' border-none hover:border-none outline-none font-dmsans text-[14px] font-normal text-[#767676]' type="text" placeholder='First Name' required/>
+                    <h3 
+                    className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>First Name*</h3>
+
+                    <input 
+                    type="text" 
+                    placeholder='First Name' 
+                    required
+                    className=' border-none hover:border-none outline-none font-dmsans text-[14px] font-normal text-[#767676]' />
                 </div>
             </div>
             
             <div className=" border-b-2 border-[#F0F0F0] w-[45%] h-[70px] items-center flex">
                 <div className="">
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Last Name*</h3>
-                    <input className=' border-none hover:border-none outline-none font-dmsans text-[14px] font-normal text-[#767676]' type="text" placeholder='Last Name' required/>
+
+                    <input 
+                    type="text" 
+                    placeholder='Last Name' 
+                    required
+                    className=' border-none hover:border-none outline-none font-dmsans text-[14px] font-normal text-[#767676]'                     
+                    />
                 </div>
             </div>
         </div>
@@ -41,7 +57,12 @@ const CheckOut = () => {
         <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex" >
             <div className="">
                 <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Companye Name (optional)</h3>
-                <input className='outline-none font-dmsans text-[14px] font-normal text-[#767676]' type="text" placeholder='Company Name' required/>
+                <input 
+                type="text" 
+                placeholder='Company Name' 
+                required
+                className='outline-none font-dmsans text-[14px] font-normal text-[#767676]'                
+                />
             </div>
         </div>
 
@@ -52,26 +73,54 @@ const CheckOut = () => {
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Country *</h3>
                 </div>
 
-                <form className="w-full">
+                <label className="w-full">
                 <select className='outline-none' required>
-                    <option selected="" className='font-dmsans text-[14px] font-normal text-[#767676]'>Please select</option>
-                    <option value="US" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>S</option>
-                    <option value="CA" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>M</option>
-                    <option value="FR" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>L</option>
-                    <option value="DE" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>XL</option>
-                    <option value="DE" className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>XXL</option>
+                    <option 
+                    selected="" 
+                    className='font-dmsans text-[14px] font-normal text-[#767676]'>Please select</option>
+
+                    <option 
+                    value="US" 
+                    className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>S</option>
+
+                    <option 
+                    value="CA" 
+                    className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>M</option>
+
+                    <option 
+                    value="FR" 
+                    className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>L</option>
+
+                    <option 
+                    value="DE" 
+                    className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>XL</option>
+
+                    <option 
+                    value="DE" 
+                    className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>XXL</option>
+
                 </select>
-                </form>
+                </label>
             </div>
         </div>
 
         <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center">
                 <div className="w-full">
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Street Address *</h3>
-                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full border-b-2 border-[#F0F0F0]' type="text" placeholder='House number and street name' required/>
+                    <input 
+                    type="text" 
+                    placeholder='House number and street name' 
+                    required
+                    className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full border-b-2 border-[#F0F0F0]'                    
+                    />
                 </div>
+
                     <div className="items-center">
-                    <input className='  outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full border-b-2 border-[#F0F0F0] py-3 ' type="text" placeholder='Apartment, suite, unit etc. (optional)'/>
+                    <input 
+                    type="text" 
+                    placeholder='Apartment, suite, unit etc. (optional)'
+                    className='  outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full border-b-2 border-[#F0F0F0] py-3 '                     
+                    />
                     </div>
         </div>
 
@@ -79,35 +128,59 @@ const CheckOut = () => {
         <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex mt-6">
                 <div className="w-full">
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Town/City *</h3>
-                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="text" placeholder='Town/City' required/>
+                    <input 
+                    type="text" 
+                    placeholder='Town/City' 
+                    required
+                    className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' 
+                    />
                 </div>
         </div>
 
         <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
                 <div className="w-full">
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>County (optional)</h3>
-                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="text" placeholder='County'/>
+                    <input 
+                    type="text" 
+                    placeholder='County'
+                    className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' 
+                 />
                 </div>
         </div>
 
         <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
                 <div className="w-full">
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Post Code *</h3>
-                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="text" placeholder='Post Code' required/>
+                    <input 
+                    type="text" 
+                    placeholder='Post Code' 
+                    required
+                    className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' 
+               />
                 </div>
         </div>
 
         <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
                 <div className="w-full">
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Phone *</h3>
-                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="tel" placeholder='Phone' required/>
+                    <input 
+                    type="tel" 
+                    placeholder='Phone' 
+                    required
+                    className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' 
+                />
                 </div>
         </div>
 
         <div className=" border-b-2 border-[#F0F0F0] h-[70px] items-center flex ">
                 <div className="w-full">
                     <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>Email Address *</h3>
-                    <input className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' type="email" placeholder='Email' required/>
+                    <input 
+                    type="email" 
+                    placeholder='Email' 
+                    required
+                    className=' outline-none font-dmsans text-[14px] font-normal text-[#767676] w-full' 
+                   />
                 </div>
         </div>
             
