@@ -24,16 +24,19 @@ const ShopProducts = () => {
     let data = useContext(apiData)
     let dispatch = useDispatch()
 
-    let [category, setCategory] = useState(false)
-    let [barnd, setBrand] = useState(false)
-    let [price, setPrice] = useState(false)
+    let [category, setCategory] = useState(true)
+    let [barnd, setBrand] = useState(true)
+    let [price, setPrice] = useState(true)
 
     let [subCategory, setSubCategory] = useState([])
     let [categorySearcheFilter, setCategorySearcheFilter] = useState([])
     let [filterShow, setFilterShow] = useState([])
     let [productShow, setProductShow] = useState(true)
     let [brandShow, setBrandShow] = useState([])
-
+    let [highPrice, setHighPrice] = useState("")
+    let [lowPrice, setLowPrice] = useState("")
+    let [filterPrice, setFilterPrice] = useState([])
+ 
     let [multiList, setMultiList] = useState ('')
 
     let [currentPage, setCurrentPage] = useState(1)
@@ -67,15 +70,15 @@ const ShopProducts = () => {
 
         let filterSlice = categorySearcheFilter.slice(0, 6)
         setFilterShow(filterSlice)
-    }, [data, categorySearcheFilter])
+    }, [data, categorySearcheFilter,filterPrice])
 
     let handleCatShow = (citem) => {
         let categoryFilter = data.filter((item) => item.category == citem)
         setCategorySearcheFilter(categoryFilter)
     }
 
-    let handleBrandShow = (citem) => {
-        let brandFilter = data.filter((item) => item.brand == citem )
+    let handleBrandShow = (bitem) => {
+        let brandFilter = data.filter((item) => item.brand == bitem )
         setCategorySearcheFilter(brandFilter)
     }
 
@@ -83,6 +86,14 @@ const ShopProducts = () => {
         setFilterShow(categorySearcheFilter)
         setProductShow(false)
     }
+
+    let handlePrice = (value)=>{
+        setLowPrice(value.low);
+        setHighPrice(value.high);
+        let priceFilter = data.filter((item)=>item.price > value.low && item.price < value.high)
+        setFilterPrice(priceFilter);
+    }
+    
 
     let handleProductHide = () => {
         let filterSlice = categorySearcheFilter.slice(0,6)
@@ -130,11 +141,8 @@ const ShopProducts = () => {
                         <div className=" mt-[20px] cursor-pointer" >
                             <h3 onClick={() => setPrice(!price)} className='font-dmsans text-[20px] font-bold text-[#262626] flex items-center justify-between'>Shop by Price</h3>
                             {price && <ul>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$0.00 - $9.99</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$10.00 - $19.99</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$20.00 - $29.99</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$30.00 - $39.99</li>
-                                <li className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$40.00 - $69.99</li>
+                                <li onClick={ ()=> handlePrice({low:0, high:10})} className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$0 - $10</li>
+                                <li onClick={ ()=> handlePrice({low:10, high:20})} className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]  border-b-[1px] border-[#F0F0F0] py-[20px] flex items-center'>$10 - $20</li>
                             </ul>}
 
                         </div>
@@ -170,7 +178,63 @@ const ShopProducts = () => {
 
 
                         <Flex className=" flex-wrap justify-between">
-                            {categorySearcheFilter.length > 0 ?
+                            { filterPrice.length > 0 ?
+                                <>
+                                <div className="">
+                                    <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between" }`}>
+                                        {filterPrice.map((item) => (
+                                            <div className="  cursor-pointer mt-[28px]">
+                                                <div className="p-2 bg-[#FFFF]">
+                                                    <div className=" relative group overflow-hidden">
+                                                        <Link to={`/product/${item.id}`}>
+                                                            <img className='w-full lg:h-[350px] h-[200px] hover:scale-125 duration-700 ease-in-out' src={item.thumbnail} alt="Product4" />
+                                                        </Link>
+
+                                                        <div className="">
+                                                            <p className=' absolute lg:top-5 lg:left-5 top-1 left-1 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
+                                                        </div>
+                                                        <div className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] lg:pr-[30px] lg:py-[26px] py-3 opacity-0 group-hover:opacity-[1] duration-700 ease-in-out hover:skew-y-3">
+                                                            <div className="flex items-center gap-x-2 text-end justify-end">
+                                                                <p className='font-dmsans lg:text-[16px] text-[14px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Wish List</p>
+                                                                <FaHeart />
+                                                            </div>
+                                                            <div className=" flex items-center gap-x-2 text-end justify-end lg:pt-5 pt-1">
+                                                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626]  duration-500 ease-in-out'>Compare</p>
+                                                                <TfiReload />
+                                                            </div>
+                                                            <div className=" flex items-center gap-x-2 justify-end lg:pt-5 pt-1">
+                                                                <p className='font-dmsans text-[16px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out' onClick={() => hanldePCart(item)}>Add to Cart</p>
+                                                                <FaShoppingCart />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className=" flex justify-between mt-[24px]">
+                                                        <div className=""><h3 className='font-dmsans text-[20px] font-bold text-[#262626]'> {item.title} </h3></div>
+                                                        <div className=""><h3 className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>$ {item.price} </h3></div>
+                                                    </div>
+                                                    <div className=" mt-2">
+                                                        <p className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>Black</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                </div>
+                                    {/* <div className="mt-5 cursor-pointer items-center justify-center flex relative after:absolute after:content-[''] after:h-[2px] after:w-full after:bg-[#767676] after:top-[50%] after:translate-y-[-50%] after:left-0 after:bg-from-indigo-50 after:z-10">
+                                        {productShow ? categorySearcheFilter.length > 6 &&
+                                            <div className="">
+                                                <button className=' border-[2px] border-[#767676] rounded-3xl py-1 px-8 z-50 relative bg-white font-dmsans font-bold text-[16px] hover:bg-[#262626] hover:text-white duration-150 ease-in-out hover:border-transparent '  onClick={handleProductShow}>Show All</button>
+                                            </div>
+                                            :
+                                            <button className=' border-[2px] border-[#767676] rounded-3xl py-1 px-8 z-50 relative bg-white font-dmsans font-bold text-[16px] hover:bg-[#262626] hover:text-white duration-150 ease-in-out hover:border-transparent ' onClick={handleProductHide}>Hide</button>
+                                        }
+                                    </div> */}
+                                </>
+                            :
+
+                            
+                            categorySearcheFilter.length > 0 ?
                                 <>
                                 <div className="">
                                     <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between" }`}>
@@ -179,13 +243,13 @@ const ShopProducts = () => {
                                                 <div className="p-2 bg-[#FFFF]">
                                                     <div className=" relative group overflow-hidden">
                                                         <Link to={`/product/${item.id}`}>
-                                                            <img className='w-full lg:h-[350px] h-[200px]' src={item.thumbnail} alt="Product4" />
+                                                            <img className='w-full lg:h-[350px] h-[200px] hover:scale-125 duration-700 ease-in-out' src={item.thumbnail} alt="Product4" />
                                                         </Link>
 
                                                         <div className="">
                                                             <p className=' absolute lg:top-5 lg:left-5 top-1 left-1 py-2 px-[33px] bg-[#262626] font-dmsans text-[14px] font-bold text-[#FFFFFF]'> {item.discountPercentage} %</p>
                                                         </div>
-                                                        <div className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] lg:pr-[30px] lg:py-[26px] py-3 opacity-0 group-hover:opacity-[1] duration-300 ease-in-out">
+                                                        <div className=" absolute w-full bottom-[-200px] group-hover:bottom-0 right-0 bg-[#FFF] lg:pr-[30px] lg:py-[26px] py-3 opacity-0 group-hover:opacity-[1] duration-700 ease-in-out hover:skew-y-3">
                                                             <div className="flex items-center gap-x-2 text-end justify-end">
                                                                 <p className='font-dmsans lg:text-[16px] text-[14px] font-normal text-[#767676] hover:font-bold hover:text-[#262626] duration-500 ease-in-out'>Add to Wish List</p>
                                                                 <FaHeart />

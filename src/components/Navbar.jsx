@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { productRemove } from './slice/productSlice';
 import { apiData } from './ContextApi';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Navbar = () => {
 
@@ -20,7 +21,6 @@ const Navbar = () => {
     };
     let [catShow, setCatShow] = useState(false);
     let [cartShow, setCartShow] = useState(false);
-    let [cartShowTwo, setCartShowTwo] = useState(true)
     let [accountShow, setAccountShow] = useState(false);
     let [searchInput, setSearchInput] = useState('');
     let [searchFilter, setSearchFilter] = useState([]);
@@ -55,12 +55,12 @@ const Navbar = () => {
             };
 
             if(cartRef.current.contains(e.target)){
-                setCartShowTwo(cartShowTwo)
+                setCartShow(true)
             }else{
                 
             };
         });
-    }, [catShow, cartShow, accountShow,cartShowTwo]);
+    }, [catShow, cartShow, accountShow]);
 
     let handleInput = (e) => {
         setSearchInput(e.target.value);
@@ -89,6 +89,22 @@ const Navbar = () => {
             handleSingleSearch(searchFilter[activeIndex].id);
         }
     };
+
+    let handleCart = () => {
+        toast("Let's go cart page")
+        setCartShow(false)
+        setTimeout(() => {
+            navigate("/cart")           
+        }, 2000);
+    }
+
+    let handleCheck = () => {
+        toast("Let's go ChechOut page")
+        setCartShow(false)
+        setTimeout(() => {
+            navigate("/checkout")           
+        }, 2000);
+    }
 
     const {totalPrice, totalQuantity} = data.reduce((acc, item) => {
         acc.totalPrice += item.price * item.qun
@@ -181,19 +197,20 @@ const Navbar = () => {
                             </div>}
                         </div>
 
-                        <div className=''>
+                        <div className='' ref={cartRef}>
                             <div className="cursor-pointer" ref={cartref}>
                                 <div className="relative">
                                     <FaCartPlus />
                                     {data.length ? <div className="absolute h-[25px] w-[25px] top-[-22px] left-[8px] bg-[#767676] rounded-full text-center text-white">{data.length}</div> : ""}
                                 </div>
                             </div>
+                            
+                            <div className="" >
                             {data.length > 0 ? cartShow && <div className="absolute top-[25px] right-0 z-[1] h-[241px] w-[360px]">
                                 <div 
-                                  className=" h-[450px] overflow-y-scroll bg-white" 
-                                  ref={cartRef}
+                                  className={`${data.length > 4 ? "h-[550px] overflow-y-scroll bg-white" : ""} `}
+                                  
                                 >
-                                {cartShowTwo &&
                                 <div className="">
                                     {data.map((item, index) => (
                                     <div 
@@ -207,39 +224,54 @@ const Navbar = () => {
                                             <p className='font-dmsans text-[14px] font-bold text-[#262626]'>{item.title}</p>
                                             <h3 className='font-dmsans text-[14px] font-bold text-[#262626] mt-[12px]'>$ {item.price.toFixed()}</h3>
                                         </div>
-                                        <div className="mt-[35px] ml-[78px]" onClick={() => handleRemove(index)}>
+                                        <div 
+                                        className="mt-[35px] ml-[78px]" 
+                                        onClick={() => handleRemove(index)}>
                                             <ImCross />
                                         </div>
                                     </div>
                                 ))}
                                 </div>
-                                }
                                 </div>
 
                                 <div className="w-full pt-[14px] px-[22px] pb-[20px] bg-[#FFF]">
                                     <div>
-                                        <h4 className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$ {totalPrice.toFixed()}</span></h4>
+                                        <h4 
+                                        className='font-dmsans text-[16px] font-normal leading-[23px] text-[#767676]'>Subtotal: <span className='font-dmsans text-[16px] font-bold leading-[23px] text-[#262626]'>$ {totalPrice.toFixed()}</span></h4>
                                     </div>
 
                                     <div className="flex justify-around mt-8">
                                         <div>
-                                            <Link 
-                                            to="/cart" 
-                                            className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>View Cart</Link>
+                                            <a 
+                                            onClick={handleCart} 
+                                            className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>View Cart</a>
                                         </div>
                                         <div>
-                                            <Link 
-                                            to="./checkout" 
+                                            <a 
+                                            onClick={handleCheck}
                                             className='py-4 px-10 border-2 border-[#2B2B2B] font-dmsans text-[14px] font-bold text-[#262626] hover:bg-[#262626] hover:text-white hover:border-transparent'>
-                                                Checkout</Link>
+                                                Checkout</a>
                                         </div>
                                     </div>
                                 </div>
                             </div> : ""}
+                            </div>
                         </div>
                     </div>
                 </div>
             </Container>
+            <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
         </section>
     );
 };
