@@ -24,9 +24,9 @@ const ShopProducts = () => {
     let data = useContext(apiData)
     let dispatch = useDispatch()
 
-    let [category, setCategory] = useState(true)
-    let [barnd, setBrand] = useState(true)
-    let [price, setPrice] = useState(true)
+    let [category, setCategory] = useState(false)
+    let [barnd, setBrand] = useState(false)
+    let [price, setPrice] = useState(false)
 
     let [subCategory, setSubCategory] = useState([])
     let [categorySearcheFilter, setCategorySearcheFilter] = useState([])
@@ -40,7 +40,7 @@ const ShopProducts = () => {
     let [multiList, setMultiList] = useState ('')
 
     let [currentPage, setCurrentPage] = useState(1)
-    let [perPage, setPerPage] = useState(9)
+    let [perPage, setPerPage] = useState(12)
     let lastPage = currentPage * perPage
     let firstPage = lastPage - perPage
     let allData = data.slice(firstPage, lastPage)
@@ -110,7 +110,7 @@ const ShopProducts = () => {
     }
 
     return (
-        <section className='bg-[#F5F5F3]'>
+        <section className='bg-[#F5F5F3] px-3'>
             <Container>
                 <div className=" pt-[5px]">
                     <div className="">
@@ -118,8 +118,10 @@ const ShopProducts = () => {
                         <p className='font-dmsans text-[12px] font-normal text-[#767676] flex items-center'> <Link to="/">Home</Link> <IoIosArrowForward /> <Link to="/product">Products</Link> </p>
                     </div>
                 </div>
-                <Flex className="mt-[20px] justify-between">
-                    <div className=" w-[20%]">
+
+
+                <div className="mt-[20px] lg:flex justify-between">
+                    <div className=" lg:w-[20%] w-full">
                         <div className="">
                             <h3 onClick={() => setCategory(!category)} className='font-dmsans text-[20px] font-bold text-[#262626] cursor-pointer' >Shop by Category</h3>
                             {category && <ul className='h-[300px] overflow-y-scroll'>
@@ -148,9 +150,9 @@ const ShopProducts = () => {
                         </div>
                     </div>
 
-                    <div className=" w-[77%]">
-                        <div className=" flex">
-                            <div className=" w-[40%]">
+                    <div className=" lg:w-[77%] w-full">
+                        <div className=" lg:flex">
+                            <div className=" lg:w-[40%] w-full justify-center flex lg:justify-start">
                                 <div className=" flex items-center gap-x-10">
                                     <div className={`p-3 border-2 ${multiList == "activeList" ? "hover:bg-[#262626] hover:border-transparent hover:text-[#FFFFFF] text-[#737373]" : "bg-[#262626] text-white" } cursor-pointer`} onClick={()=>setMultiList("")}>
                                         <IoGrid className='text-[32px]' />
@@ -160,14 +162,14 @@ const ShopProducts = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" w-[30%] flex items-center font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] gap-x-[14px]">
+                            <div className=" lg:w-[30%] hidden lg:flex items-center font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] gap-x-[14px]">
                                 <h3>Sort by:</h3>
                                 <div className=" flex items-center h-[36px] w-[239px] px-5 border-2 justify-between">
                                     <p>Featured</p>
                                     <TiArrowSortedDown />
                                 </div>
                             </div>
-                            <div className=" w-[30%] flex items-center font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] gap-x-[14px]">
+                            <div className=" lg:w-[30%] lg:flex hidden items-center font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] gap-x-[14px]">
                                 <h3>Show:</h3>
                                 <div className=" flex items-center h-[36px] w-[239px] px-5 border-2 justify-between">
                                     <p>36</p>
@@ -187,7 +189,7 @@ const ShopProducts = () => {
                                                 <div className="p-2 bg-[#FFFF]">
                                                     <div className=" relative group overflow-hidden">
                                                         <Link to={`/product/${item.id}`}>
-                                                            <img className='w-full lg:h-[350px] h-[200px] hover:scale-125 duration-700 ease-in-out' src={item.thumbnail} alt="Product4" />
+                                                            <img className='w-full lg:h-[350px] h-[200px] hover:scale-125 duration-700 ease-in-out' src={item.thumbnail} alt="" />
                                                         </Link>
 
                                                         <div className="">
@@ -291,7 +293,7 @@ const ShopProducts = () => {
 
                                 <div className={` ${multiList == "activeList" ? "" : "flex flex-wrap justify-between " }`}>
                                 {allData.map((item) => (
-                                        <div className="  cursor-pointer mt-[28px] w-[32%] flex justify-between">
+                                        <div className="  cursor-pointer mt-[28px] lg:w-[32%] w-[49%] flex flex-wrap justify-between">
                                         <div className="p-2 bg-[#FFFF]">
                                             <div className=" relative group overflow-hidden">
                                                 <Link to={`/product/${item.id}`}>
@@ -315,8 +317,8 @@ const ShopProducts = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className=" flex justify-between mt-[24px]">
-                                                <div className=""><h3 className='font-dmsans text-[20px] font-bold text-[#262626]'> {item.title} </h3></div>
+                                            <div className=" lg:flex lg:justify-between mt-[24px]">
+                                                <div className=""><h3 className='font-dmsans lg:text-[20px] text-[15px] font-bold text-[#262626]'> {item.title} </h3></div>
                                                 <div className=""><h3 className='font-dmsans text-[16px] font-normal text-[#767676] leading-[30px]'>$ {item.price} </h3></div>
                                             </div>
                                             <div className=" mt-2">
@@ -332,7 +334,7 @@ const ShopProducts = () => {
 
 
                         <Flex className=" justify-between py-[50px]">
-                            <div className=" w-[50%]">
+                            <div className=" lg:w-[50%] w-full">
                                 <>
                                     <nav aria-label="Page navigation example">
                                         <ul className="inline-flex -space-x-px text-sm cursor-pointer">
@@ -371,7 +373,7 @@ const ShopProducts = () => {
 
                             </div>
 
-                            <div className="">
+                            <div className=" hidden">
                                 <div className="">
                                     <h2>Products from 1 to {perPage} of {data.length}</h2>
                                 </div>
@@ -379,7 +381,7 @@ const ShopProducts = () => {
                         </Flex>
                     </div>
 
-                </Flex>
+                </div>
             </Container>
         </section>
     )

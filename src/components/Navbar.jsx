@@ -201,7 +201,7 @@ const Navbar = () => {
                             <div className="cursor-pointer" ref={cartref}>
                                 <div className="relative">
                                     <FaCartPlus />
-                                    {data.length ? <div className="absolute h-[25px] w-[25px] top-[-22px] left-[8px] bg-[#767676] rounded-full text-center text-white">{data.length}</div> : ""}
+                                    {data.length ? <div className="absolute h-[25px] w-[25px] top-[-22px] lg:left-[8px] bg-[#767676] rounded-full text-center text-white">{data.length}</div> : ""}
                                 </div>
                             </div>
                             

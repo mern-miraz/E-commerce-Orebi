@@ -9,9 +9,14 @@ import { FaEyeSlash } from "react-icons/fa6";
 import { ToastContainer, toast } from 'react-toastify';
 
 
+
 const Signup = () => {
     const auth = getAuth();
     const db = getDatabase();
+    const validEmail = new RegExp(
+        '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
+     );
+    const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
     let [email, setEmail] = useState("");
@@ -26,10 +31,11 @@ const Signup = () => {
     let [success, setSuccess] = useState("");
 
 
+
     let [pshow, setPshow] = useState(false);
     let [conpshow, setconPshow] = useState(false);
     let navigate = useNavigate();
-
+0
     let handleFirstName = (e) => {
         setFirstName(e.target.value); 
         setFirstNameErr("");
@@ -58,6 +64,7 @@ const Signup = () => {
 
 
     let handleSubmit = (e) => {
+
         if(!firstName){
             setFirstNameErr("First Name Field is Required");
         };
@@ -67,12 +74,12 @@ const Signup = () => {
         if(!email){
             setEmialErr("Email Field is Required");
         }
-        if(password < 8 && !password){
+        if(!password){
             setPassErr("Password Field is Required");
         };
-        if(password === !conPass){
+        if(!conPass){
             setConPassErr("Confirm Password Field is Required")
-        }
+        };
 
 
         e.preventDefault()
@@ -198,6 +205,7 @@ const Signup = () => {
                                         className='font-dmsans text-[14px] font-normal text-[#767676] outline-none w-full h-[20px]' />
 
                                         {emailErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{emailErr}</p>) : ("") }
+                                        
                                     </div>
 
                                     <div className="w-[48%] border-b-[1px] border-[#F0F0F0] mt-5">

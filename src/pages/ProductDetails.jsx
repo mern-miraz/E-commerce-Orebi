@@ -57,7 +57,7 @@ const ProductDetails = () => {
 
 
   return (
-    <Container>
+    <Container className="px-3">
         <div className=" pt-[30px]">
                     <div className="">
                         <h3 className='font-dmsans text-[49px] font-bold text-[#262626]'>Products</h3>
@@ -66,16 +66,16 @@ const ProductDetails = () => {
         </div>
 
 
-        <Flex className=" flex-wrap justify-between mt-5">
+        <Flex className="flex-wrap mt-5 lg:justify-start justify-between">
           {singleData?.images?.map((item)=>(         
-          <div className="w-[32%] ">
-            <img className=' my-5' src={item} alt="" />
+          <div className="lg:w-[24%] w-[49%] lg:h-[500px] h-[300px] shadow-md lg:mx-3 flex justify-center items-center">
+            <img className=' my-5 hover:scale-110 duration-500 ease-in-out lg:h-[500px] h-[300px]' src={item} alt="" />
           </div>
           ))}
         </Flex>
 
 
-        <div className=" w-[48%]">
+        <div className=" lg:w-[48%] w-full">
           <div className="">
             <h3 className='font-dmsans text-[39px] font-bold text-[#262626]'>Product</h3>
           </div>
@@ -88,25 +88,25 @@ const ProductDetails = () => {
             <h3 className=' font-dmsans text-[20px] font-bold text-[#262626]'>$ {singleData.price}</h3>
           </div>
 
-          <div className=" flex items-center py-4">
+          <div className=" flex items-center lg:py-0 ">
             <h3 className=' font-dmsans text-[16px] font-bold leading-[23px] text-[#262626] h-8'>COLOR:</h3>
             <div className=" ms-[53px] flex gap-x-2 h-8">
-            <p className=' h-5 w-5 rounded-full bg-[#979797] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#979797] '></p>
-            <p className=' h-5 w-5 rounded-full bg-[#FF8686] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#FF8686] '></p>
-            <p className=' h-5 w-5 rounded-full bg-[#7ED321] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#7ED321] '></p>
-            <p className=' h-5 w-5 rounded-full bg-[#B6B6B6] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#B6B6B6] '></p>
-            <p className=' h-5 w-5 rounded-full bg-[#15CBA5] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#15CBA5] '></p>
+            <p className=' h-5 w-5 rounded-full bg-[#979797] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#979797] duration-500 ease-in-out cursor-pointer'></p>
+            <p className=' h-5 w-5 rounded-full bg-[#FF8686] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#FF8686] duration-500 ease-in-out cursor-pointer'></p>
+            <p className=' h-5 w-5 rounded-full bg-[#7ED321] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#7ED321] duration-500 ease-in-out cursor-pointer'></p>
+            <p className=' h-5 w-5 rounded-full bg-[#B6B6B6] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#B6B6B6] duration-500 ease-in-out cursor-pointer'></p>
+            <p className=' h-5 w-5 rounded-full bg-[#15CBA5] hover:h-7 hover:w-7 hover:rounded-full hover:bg-[#15CBA5] duration-500 ease-in-out cursor-pointer'></p>
             </div>
           </div>
 
-          <div className=" flex items-center py-6 border-b-[1px] border-[#D8D8D8]">
+          <div className=" flex items-center lg:py-2 py-2 border-b-[1px] border-[#D8D8D8]">
             <h3 className=' font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>STATUS:</h3>
             <h4 className=' font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] ms-[27px]'>{singleData.availabilityStatus} : {singleData.stock}</h4>
           </div>
 
-          <div className=" flex items-center py-6 border-b-[1px] border-[#D8D8D8]">
-            <Link className='font-dmsans text-[14px] font-bold text-[#262626] py-4 px-[45px] border-[1px] border-[#262626] hover:bg-[#262626] hover:text-white ease-in-out duration-500 hover:border-transparent'>Add to Wish List</Link>
-            <p to="/cart" className='font-dmsans text-[14px] font-bold text-[#262626] py-4 px-[45px] border-[1px] border-[#262626] hover:bg-[#262626] hover:text-white ease-in-out duration-500 hover:border-transparent ms-5' onClick={()=>handleAddToCart(singleData)}>Add to Cart</p>
+          <div className=" flex items-center lg:py-3 py-2 border-b-[1px] border-[#D8D8D8]">
+            <Link className='font-dmsans text-[14px] font-bold text-[#262626] lg:py-4 py-2 rounded-lg lg:rounded-none lg:px-[45px] px-4 border-[1px] border-[#262626] hover:bg-[#262626] hover:text-white ease-in-out duration-500 hover:border-transparent'>Add to Wish List</Link>
+            <p className='font-dmsans text-[14px] font-bold text-[#262626] lg:py-4 py-2 rounded-lg lg:rounded-none lg:px-[45px] px-5 border-[1px] border-[#262626] hover:bg-[#262626] hover:text-white ease-in-out duration-500 hover:border-transparent ms-5' onClick={()=>handleAddToCart(singleData)}>Add to Cart</p>
           </div>
 
           <div className=''>
@@ -120,7 +120,7 @@ const ProductDetails = () => {
             </div> }
           </div>
 
-          <div className='py-6'>
+          <div className='lg:py-0'>
             <div className="flex items-center py-6 border-b-[1px] border-[#D8D8D8] justify-between cursor-pointer" onClick={()=>setShow2(!show2)}>
             <h3 className='font-dmsans text-[16px] font-bold text-[#262626] leading-[23px]'>SHIPPING & RETURNS</h3>
             {show2 == true ? <RxCross2/> : <FaPlus/>}

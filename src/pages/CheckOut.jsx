@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const CheckOut = () => {
   return (
-    <Container>
+    <Container className="px-3">
         <div className=" pt-[30px]">
                     <div className="">
                         <h3 className='font-dmsans text-[49px] font-bold text-[#262626]'>Cart</h3>
@@ -21,7 +21,7 @@ const CheckOut = () => {
     </div>
 
 
-        <div className="mt-20 w-[70%]">
+        <div className="mt-20 lg:w-[70%] w-full">
             <div className=""><h3 className='font-dmsans text-[39px] font-bold text-[#262626]'>Billing Details</h3></div>
 
 
