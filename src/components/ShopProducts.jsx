@@ -327,13 +327,8 @@ const ShopProducts = () => {
                                         </div>
                                     </div>
                                 ))}
-                                    </div>
-                            }
-                            
-                        </Flex>
 
-
-                        <Flex className=" justify-between py-[50px]">
+<Flex className=" justify-between py-[50px]">
                             <div className=" lg:w-[50%] w-full">
                                 <>
                                     <nav aria-label="Page navigation example">
@@ -379,6 +374,13 @@ const ShopProducts = () => {
                                 </div>
                             </div>
                         </Flex>
+                                    </div>
+                            }
+                            
+                        </Flex>
+
+
+                        
                     </div>
 
                 </div>

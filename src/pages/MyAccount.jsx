@@ -6,7 +6,7 @@ import Container from '../components/Container';
 const MyAccount = () => {
   return (
     <>
-    <section className='pb-10'>
+    <section className='pb-10 px-3 lg:px-0'>
         <Container>
         <div className=" pt-[5px]">
                     <div className="">

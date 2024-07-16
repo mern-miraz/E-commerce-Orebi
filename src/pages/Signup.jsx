@@ -16,7 +16,7 @@ const Signup = () => {
     const validEmail = new RegExp(
         '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
      );
-    const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$');
+    const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
     let [email, setEmail] = useState("");
@@ -29,6 +29,9 @@ const Signup = () => {
     let [passErr, setPassErr] = useState("");
     let [conPassErr, setConPassErr] = useState("");
     let [success, setSuccess] = useState("");
+
+    let [validEmailErr, setValidEmailErr] = useState("") 
+    let [validPassErr, setValidPassErr] = useState("")
 
 
 
@@ -74,9 +77,15 @@ const Signup = () => {
         if(!email){
             setEmialErr("Email Field is Required");
         }
+        if(!validEmail.test(email)){
+            setValidEmailErr("Your email is invalid");
+        }
         if(!password){
             setPassErr("Password Field is Required");
         };
+        if (!validPassword.test(password)){
+            setValidPassErr("Your password is invalid");
+        }
         if(!conPass){
             setConPassErr("Confirm Password Field is Required")
         };
@@ -204,7 +213,10 @@ const Signup = () => {
                                         placeholder='company@domain.com' 
                                         className='font-dmsans text-[14px] font-normal text-[#767676] outline-none w-full h-[20px]' />
 
-                                        {emailErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{emailErr}</p>) : ("") }
+                                        { emailErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{emailErr}</p>) : ("") }
+                                        
+                                        { validEmailErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{validEmailErr}</p>) : ("") }
+                                        
                                         
                                     </div>
 
@@ -309,6 +321,7 @@ const Signup = () => {
                                             className='font-dmsans text-[14px] font-normal text-[#767676] outline-none w-full h-[20px]' />
 
                                             {passErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{passErr}</p>) : ("") }
+                                            {validPassErr ? (<p className="w-[100%] text-[red] text-[15px] py-1 mt-1 font-bold tracking-wider justify-center">{validPassErr}</p>) : ("") }
                                         </div>
 
                                         <div 
