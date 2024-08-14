@@ -109,6 +109,10 @@ const ShopProducts = () => {
         setMultiList("activeList");
     }
 
+    let handleShowData = (e) => {
+        setPerPage(e.target.value);
+    }
+
     return (
         <section className='bg-[#F5F5F3] px-3'>
             <Container>
@@ -170,11 +174,22 @@ const ShopProducts = () => {
                                 </div>
                             </div>
                             <div className=" lg:w-[30%] lg:flex hidden items-center font-dmsans text-[16px] font-normal text-[#767676] leading-[30px] gap-x-[14px]">
-                                <h3>Show:</h3>
-                                <div className=" flex items-center h-[36px] w-[239px] px-5 border-2 justify-between">
-                                    <p>36</p>
-                                    <TiArrowSortedDown />
-                                </div>
+                            <label
+                    htmlFor=""
+                    className="text-[16px] font-sans text-[#767676] font-normal"
+                  >
+                    Show :{" "}
+                  </label>
+                  <select
+                    onChange={handleShowData}
+                    name=""
+                    id=""
+                    className="border-[1px] border-[#767676] rounded-sm text-start lg:px-[60px] px-[25px] py-[5px] text-[16px] font-sans text-[#767676] font-normal"
+                  >
+                    <option value="12">12</option>
+                    <option value="18">18</option>
+                    <option value="24">24</option>
+                  </select>
                             </div>
                         </div>
 
