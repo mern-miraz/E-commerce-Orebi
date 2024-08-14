@@ -27,6 +27,15 @@ const ShopProducts = () => {
     let [category, setCategory] = useState(false)
     let [barnd, setBrand] = useState(false)
     let [price, setPrice] = useState(false)
+    let [resPagination,setResPagination] = useState(true)
+
+    useEffect(()=>{
+        if(window.innerWidth > 1024){
+            setResPagination(true)
+        }else{
+            setResPagination(false)
+        }
+    },[])
 
     let [subCategory, setSubCategory] = useState([])
     let [categorySearcheFilter, setCategorySearcheFilter] = useState([])
@@ -358,15 +367,17 @@ const ShopProducts = () => {
                                                 
                                             }
 
-                                            
-                                            {pageNumber.map((item, i) => (
+                                            {resPagination &&
+                                            pageNumber.map((item, i) => (
                                                 
                                                 <li>
                                                     <Link onClick={() => setCurrentPage(item + 1)} className={currentPage == i + 1 ? " flex items-center justify-center px-3 h-8 leading-tight text-white bg-[#262626] border border-gray-300 cursor-pointer" : " flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300"}>
                                                     {item + 1}
                                                 </Link>
                                                 </li>                                                
-                                            ))}
+                                            ))
+                                            }
+
                                             {currentPage < pageNumber.length ? pageNumber.length > 0 &&
                                                 <li onClick={nextPage}>
                                                     <Link
